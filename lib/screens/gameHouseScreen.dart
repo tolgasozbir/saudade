@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:saudade/contextExtension.dart';
+import 'package:saudade/widgets/customButton.dart';
+import 'package:saudade/widgets/portrait.dart';
 
 class GameHouseScreen extends StatefulWidget {
   const GameHouseScreen({ Key? key }) : super(key: key);
@@ -9,6 +11,10 @@ class GameHouseScreen extends StatefulWidget {
 }
 
 class _GameHouseScreenState extends State<GameHouseScreen> {
+  //customButton craft = customButton(buttonText: "buttonText", borderColor: Color(0xFFFFFFFF));
+
+
+  final img = "https://picsum.photos/200";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,54 +31,13 @@ class _GameHouseScreenState extends State<GameHouseScreen> {
             //color: Colors.white24,//Colors.grey.shade900,
             child: Column(
               children: [
-                /////////////////////     1     ////////////////////
+                /////////////////////     üst alan     ////////////////////
                 Expanded(
                   child: Row(
                     children: [
-                      Expanded(flex: 1,child: Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: SizedBox(
-                          height: context.dynamicHeigh(0.2),
-                            child: Container(
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(image: NetworkImage("https://picsum.photos/200"),fit: BoxFit.cover),
-                                  border: Border.all(color: Color(0xFF00FF00)),
-                                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-                                ),
-                            ),
-                          ),
-                      ),
-                      ),
-                      ////////////////////////          2   /////////////////////
-                      Expanded(flex: 1,child: Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: SizedBox(
-                          height: context.dynamicHeigh(0.2),
-                            child: Container(
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(image: NetworkImage("https://picsum.photos/200"),fit: BoxFit.cover),
-                                  border: Border.all(color: Color(0xFF00FF00)),
-                                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-                                ),
-                            ),
-                          ),
-                      ),
-                      ),
-                      ////////////////////////        3     ////////////////////////
-                      Expanded(flex: 1,child: Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: SizedBox(
-                          height: context.dynamicHeigh(0.2),
-                            child: Container(
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(image: NetworkImage("https://picsum.photos/200"),fit: BoxFit.cover),
-                                  border: Border.all(color: Color(0xFF00FF00)),
-                                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-                                ),
-                            ),
-                          ),
-                      ),
-                      ),
+                      Expanded(flex: 1,child: Portrait(image: img, height: 0.2)),
+                      Expanded(flex: 1,child: Portrait(image: img, height: 0.2)),
+                      Expanded(flex: 1,child: Portrait(image: img, height: 0.2)),
                      
                      ////         Day-Time    ////
                       Expanded(flex: 1,child: SizedBox(
@@ -88,53 +53,21 @@ class _GameHouseScreenState extends State<GameHouseScreen> {
                         ),
                       ),
 
-                      /// Inventory   ///
-                      Expanded(flex: 3,child: SizedBox(
-                        height: context.dynamicHeigh(0.2),
-                          child: Card(
-                            child: Row(
-                              children: [
-                                Expanded(flex: 2, child:ElevatedButton(
-                                  child: Container(
-                                    child: Center(child: Text("Inventory", style: context.theme.textTheme.headline5,))),
-                                  onPressed: (){
-                                    
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Color(0xFF545454),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-                                      side: BorderSide(color: Color(0xFFcd853f)),
-                                    )
-                                  ),
-                                ),),
-                                SizedBox(width: 10,),
+                      Expanded(flex: 3,child: Row(
+                        children: [
+                          
+                          Expanded(flex: 2, child:customButton(buttonText: "Inventory",borderColor: Color(0xFFcd853f),),),
+                          Expanded(flex: 1, child:customButton(buttonText: "Exit",borderColor: Color(0xFF8D021F),),),
 
-                                ///   Exit  //
-                                Expanded(flex: 1, child:ElevatedButton(
-                                  child: Container(
-                                    child: Center(child: Text("Exit", style: context.theme.textTheme.headline5,))),
-                                  onPressed: (){
-                                    
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Color(0xFF545454),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-                                      side: BorderSide(color: Color(0xFF8D021F)),
-                                    )
-                                  ),
-                                ),),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+                        ],
+                      ),),
                 
                     ],
                   ),
                 ),
 
+
+                ///     orta alan   ///
                 Expanded( flex: 3,
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
@@ -146,118 +79,23 @@ class _GameHouseScreenState extends State<GameHouseScreen> {
                 ),
 
 
-
+              ////  Alt   //
               Expanded( flex: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Container(
-                      width: context.dynamicWidth(1),
-                      color: Colors.cyan,
-                      child: Row(
-                      children: [
-
-                        Expanded(
-                          flex: 1,
-                          child:ElevatedButton(
-                            child: Container(
-                              child: Center(child: Text("Craft", style: context.theme.textTheme.headline5,))
-                            ),
-                            onPressed: (){
-                                      
-                            },
-                            style: ElevatedButton.styleFrom(
-                              primary: Color(0xFF545454),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-                                side: BorderSide(color: Color(0xFFcd853f)),
-                              )
-                            ),
-                          ),
-                        ),
-
-                        Expanded(
-                          flex: 1,
-                          child:ElevatedButton(
-                            child: Container(
-                              child: Center(child: Text("Cooking", style: context.theme.textTheme.headline6,))
-                            ),
-                            onPressed: (){
-                                      
-                            },
-                            style: ElevatedButton.styleFrom(
-                              primary: Color(0xFF545454),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-                                side: BorderSide(color: Color(0xFFcd853f)),
-                              )
-                            ),
-                          ),
-                        ),
-
-                        Expanded(
-                          flex: 1,
-                          child:ElevatedButton(
-                            child: Container(
-                              child: Center(child: Text("Traps", style: context.theme.textTheme.headline6,))
-                            ),
-                            onPressed: (){
-                                      
-                            },
-                            style: ElevatedButton.styleFrom(
-                              primary: Color(0xFF545454),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-                                side: BorderSide(color: Color(0xFFcd853f)),
-                              )
-                            ),
-                          ),
-                        ),
-
-                        Expanded(
-                          flex: 1,
-                          child:ElevatedButton(
-                            child: Container(
-                              child: Center(child: Text("HouseInfo", style: context.theme.textTheme.headline6,))
-                            ),
-                            onPressed: (){
-                                      
-                            },
-                            style: ElevatedButton.styleFrom(
-                              primary: Color(0xFF545454),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-                                side: BorderSide(color: Color(0xFFcd853f)),
-                              )
-                            ),
-                          ),
-                        ),
-
-                        Expanded(
-                          flex: 2,
-                          child:ElevatedButton(
-                            child: Container(
-                              child: Center(child: Text("Finish The Day", style: context.theme.textTheme.headline5,))
-                            ),
-                            onPressed: (){
-                                      
-                            },
-                            style: ElevatedButton.styleFrom(
-                              primary: Color(0xFF545454),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-                                side: BorderSide(color: Color(0xFFcd853f)),
-                              )
-                            ),
-                          ),
-                        ),
+                  child: Row(
+                  children: [
+                    //Expanded(child: c),
+                    
+                    Expanded(flex: 2,child:customButton(buttonText: "Craft", borderColor: Color(0xFFcd853f),),),
+                    Expanded(flex: 2,child:customButton(buttonText: "Cook", borderColor: Color(0xFFcd853f),),),
+                    Expanded(flex: 2,child:customButton(buttonText: "Trap", borderColor: Color(0xFFcd853f),),),
+                    Expanded(flex: 2,child:customButton(buttonText: "Info", borderColor: Color(0xFFcd853f),),),
+                    Expanded(flex: 3,child:customButton(buttonText: "Finish Day", borderColor: Color(0xFFcd853f),),),
 
 
 
 
 
-                      ],
-                    ),
-                ),
+                  ],
                   ),
               ),
                 
