@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:saudade/contextExtension.dart';
 import 'package:saudade/widgets/customButton.dart';
+import 'package:saudade/widgets/inventory.dart';
 import 'package:saudade/widgets/portrait.dart';
 
 class GameHouseScreen extends StatefulWidget {
@@ -11,7 +12,16 @@ class GameHouseScreen extends StatefulWidget {
 }
 
 class _GameHouseScreenState extends State<GameHouseScreen> {
-  //customButton craft = customButton(buttonText: "buttonText", borderColor: Color(0xFFFFFFFF));
+  customButton craftBtn = customButton(buttonText: "Craft", borderColor: Color(0xFFcd853f), function: (){},);
+  customButton cookBtn = customButton(buttonText: "Cook", borderColor: Color(0xFFcd853f), function: (){},);
+  customButton trapsBtn = customButton(buttonText: "Traps", borderColor: Color(0xFFcd853f),function: (){},);
+  customButton infoBtn = customButton(buttonText: "Info", borderColor: Color(0xFFcd853f),function: (){},);
+  customButton finishDayBtn = customButton(buttonText: "Finish Day", borderColor: Color(0xFFcd853f),function: (){},);
+
+void namess() {
+  print("selamm");
+}
+
 
 
   final img = "https://picsum.photos/200";
@@ -53,15 +63,15 @@ class _GameHouseScreenState extends State<GameHouseScreen> {
                         ),
                       ),
 
-                      Expanded(flex: 3,child: Row(
-                        children: [
-                          
-                          Expanded(flex: 2, child:customButton(buttonText: "Inventory",borderColor: Color(0xFFcd853f),),),
-                          Expanded(flex: 1, child:customButton(buttonText: "Exit",borderColor: Color(0xFF8D021F),),),
-
-                        ],
-                      ),),
-                
+                      Expanded(
+                        flex: 3,
+                        child: Row(
+                          children: [
+                            Expanded(flex: 2, child:customButton(buttonText: "Inventory",borderColor: Color(0xFFcd853f),function: ()=> print("object"),),),
+                            Expanded(flex: 1, child:customButton(buttonText: "Exit",borderColor: Color(0xFF8D021F),function: ()=> print("object"),),),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -74,6 +84,7 @@ class _GameHouseScreenState extends State<GameHouseScreen> {
                     child: Container(
                       width: context.dynamicWidth(1),
                       color: Colors.white24,
+                      child: cookBtn == infoBtn ? cookBtn : Inventory(),      /////////////////////
                     ),
                   ),
                 ),
@@ -81,27 +92,16 @@ class _GameHouseScreenState extends State<GameHouseScreen> {
 
               ////  Alt   //
               Expanded( flex: 1,
-                  child: Row(
+                child: Row(
                   children: [
-                    //Expanded(child: c),
-                    
-                    Expanded(flex: 2,child:customButton(buttonText: "Craft", borderColor: Color(0xFFcd853f),),),
-                    Expanded(flex: 2,child:customButton(buttonText: "Cook", borderColor: Color(0xFFcd853f),),),
-                    Expanded(flex: 2,child:customButton(buttonText: "Trap", borderColor: Color(0xFFcd853f),),),
-                    Expanded(flex: 2,child:customButton(buttonText: "Info", borderColor: Color(0xFFcd853f),),),
-                    Expanded(flex: 3,child:customButton(buttonText: "Finish Day", borderColor: Color(0xFFcd853f),),),
-
-
-
-
-
+                    Expanded(flex: 2,child:craftBtn),
+                    Expanded(flex: 2,child:cookBtn),
+                    Expanded(flex: 2,child:trapsBtn),
+                    Expanded(flex: 2,child:infoBtn),
+                    Expanded(flex: 3,child:finishDayBtn),
                   ],
-                  ),
+                ),
               ),
-                
-
-
-
               ],
             ),
           ),

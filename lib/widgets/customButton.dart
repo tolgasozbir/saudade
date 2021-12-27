@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:saudade/contextExtension.dart';
 
 class customButton extends StatelessWidget {
-  const customButton({
+  customButton({
     required this.buttonText, 
     required this.borderColor,
+    required this.function,
     Key? key}) : super(key: key);
 
-  final String buttonText;
-  final Color borderColor;
+  late String buttonText;
+  late Color borderColor;
+  late VoidCallback function;
   //final double paddingNum;
 
   @override
@@ -17,9 +19,7 @@ class customButton extends StatelessWidget {
       padding: const EdgeInsets.all(2.5),
       child: ElevatedButton(
         child: Center(child: Text(buttonText, style: context.theme.textTheme.headline5),),
-        onPressed: () {
-
-        },
+        onPressed: () => function(),
         style: ElevatedButton.styleFrom(
           primary: Color(0xFF545454),
           shape: RoundedRectangleBorder(
