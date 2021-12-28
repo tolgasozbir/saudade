@@ -1,8 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:saudade/contextExtension.dart';
-import 'package:saudade/widgets/customButton.dart';
-import 'package:saudade/widgets/inventory.dart';
-import 'package:saudade/widgets/portrait.dart';
+import 'package:saudade/models/character.dart';
 
 class GameHouseScreen extends StatefulWidget {
   const GameHouseScreen({ Key? key }) : super(key: key);
@@ -12,21 +11,27 @@ class GameHouseScreen extends StatefulWidget {
 }
 
 class _GameHouseScreenState extends State<GameHouseScreen> {
-  customButton craftBtn = customButton(buttonText: "Craft", borderColor: Color(0xFFcd853f), function: (){},);
-  customButton cookBtn = customButton(buttonText: "Cook", borderColor: Color(0xFFcd853f), function: (){},);
-  customButton trapsBtn = customButton(buttonText: "Traps", borderColor: Color(0xFFcd853f),function: (){},);
-  customButton infoBtn = customButton(buttonText: "Info", borderColor: Color(0xFFcd853f),function: (){},);
-  customButton finishDayBtn = customButton(buttonText: "Finish Day", borderColor: Color(0xFFcd853f),function: (){},);
+  
+  Color sideColorRed = Color(0xFF8D021F);
+  Color sideColorAmber = Color(0xFFcd853f);
+  Color sideColorYellow = Color(0xFFfcba03);
+  Color btnSurfaceColor = Color(0xFF545454);
 
-void namess() {
-  print("selamm");
-}
-
-
+  Character c1 = new Character(id: 1,name: "Tolga", image: "", hungerRate: 1, tirednessRate: 1, sicknessRate: 1);
+  Character c2 = new Character(id: 2,name: "Levent", image: "", hungerRate: 0.9, tirednessRate: 0.75, sicknessRate: 0.95);
+  Character c3 = new Character(id: 3,name: "Bilo", image: "", hungerRate: 0.9, tirednessRate: 0.7, sicknessRate: 0.95);
+  late Character selectedChar;
 
   final img = "https://picsum.photos/200";
+
+  dynamic showMenu;
+
+
   @override
   Widget build(BuildContext context) {
+
+    selectedChar=c1;
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -35,43 +40,24 @@ void namess() {
             width: context.dynamicWidth(1),
             height: context.dynamicHeigh(1),
             decoration: BoxDecoration(
+              //color: Colors.red,
               border: Border.all(color: Colors.white38),
               borderRadius: const BorderRadius.all(Radius.circular(4.0)),
             ),
-            //color: Colors.white24,//Colors.grey.shade900,
             child: Column(
               children: [
                 /////////////////////     üst alan     ////////////////////
                 Expanded(
                   child: Row(
                     children: [
-                      Expanded(flex: 1,child: Portrait(image: img, height: 0.2)),
-                      Expanded(flex: 1,child: Portrait(image: img, height: 0.2)),
-                      Expanded(flex: 1,child: Portrait(image: img, height: 0.2)),
-                     
-                     ////         Day-Time    ////
-                      Expanded(flex: 1,child: SizedBox(
-                        height: context.dynamicHeigh(0.2),
-                          child: Card(color: Color(0xFF444444),
-                            child: Column(
-                              children: [
-                                Expanded(child: Center(child: Text("Day 1"))),
-                                Expanded(child: Center(child: Text("12:30"))),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+                      Expanded(flex: 1,child: GestureDetector(child: portrait(context, sideColorYellow),onTap: (){print(c1.hungerRate); setState(() {}); },)),
+                      //Expanded(flex: 1,child: GestureDetector(child: portrait(context, sideColorYellow),onTap: (){print(c2.hp); },)),
+                      //Expanded(flex: 1,child: GestureDetector(child: portrait(context, sideColorYellow),onTap: (){print(c3.hp); },)),
+                     ////         Day-Time    //// düzenle
+                      Expanded(flex: 1,child: clockduzenlencek(context),),
 
-                      Expanded(
-                        flex: 3,
-                        child: Row(
-                          children: [
-                            Expanded(flex: 2, child:customButton(buttonText: "Inventory",borderColor: Color(0xFFcd853f),function: ()=> print("object"),),),
-                            Expanded(flex: 1, child:customButton(buttonText: "Exit",borderColor: Color(0xFF8D021F),function: ()=> print("object"),),),
-                          ],
-                        ),
-                      ),
+                      Expanded(flex: 2,child: menuButton(context, "Inventory",sideColorAmber)),
+                      Expanded(flex: 1, child: menuButton(context,"Exit",sideColorRed)),
                     ],
                   ),
                 ),
@@ -83,8 +69,8 @@ void namess() {
                     padding: const EdgeInsets.all(4.0),
                     child: Container(
                       width: context.dynamicWidth(1),
-                      color: Colors.white24,
-                      child: cookBtn == infoBtn ? cookBtn : Inventory(),      /////////////////////
+                      color: Colors.white30,
+                      child: characterInfo(context, selectedChar),      /////////////////////
                     ),
                   ),
                 ),
@@ -94,11 +80,11 @@ void namess() {
               Expanded( flex: 1,
                 child: Row(
                   children: [
-                    Expanded(flex: 2,child:craftBtn),
-                    Expanded(flex: 2,child:cookBtn),
-                    Expanded(flex: 2,child:trapsBtn),
-                    Expanded(flex: 2,child:infoBtn),
-                    Expanded(flex: 3,child:finishDayBtn),
+                    Expanded(flex: 2, child: menuButton(context,"Craft",sideColorAmber)),
+                    Expanded(flex: 2, child: menuButton(context,"Cook",sideColorAmber)),
+                    Expanded(flex: 2, child: menuButton(context,"Traps",sideColorAmber)),
+                    Expanded(flex: 2, child: menuButton(context,"Info",sideColorAmber)),
+                    Expanded(flex: 3, child: menuButton(context,"Finish Day",sideColorAmber)),
                   ],
                 ),
               ),
@@ -109,47 +95,69 @@ void namess() {
       ),
     );
   }
+
+
+  Widget characterInfo(BuildContext context,Character char){
+    return ListView(
+      children: [
+        Center(child: Text("${char.name}" , style: context.theme.textTheme.headline5?.copyWith(color: Colors.white))),
+        Center(child: Text("Health : ${char.hp}" , style: context.theme.textTheme.headline6?.copyWith(color: Colors.white))),
+        Text(""),
+        Center(child: Text("Mood : ${char.mood}" , style: context.theme.textTheme.headline6?.copyWith(color: Colors.white))),
+
+
+
+        //Center(child: Text("${char.name}'s Journal" , style: context.theme.textTheme.headline5?.copyWith(color: Colors.white))),    
+      ],
+    );
+  }
+
+  SizedBox clockduzenlencek(BuildContext context) {
+    return SizedBox(
+                      height: context.dynamicHeigh(0.2),
+                        child: Card(color: Color(0xFF444444),
+                          child: Column(
+                            children: [
+                              Expanded(child: Center(child: Text("Day 1"))),
+                              Expanded(child: Center(child: Text("12:30"))),
+                            ],
+                          ),
+                        ),
+                      );
+  }
+
+
+  Padding portrait(BuildContext context,Color sideColor) {
+    return Padding(
+    padding: const EdgeInsets.all(4.0),
+    child: SizedBox(
+      height: context.dynamicHeigh(0.2),
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: NetworkImage(img),
+              fit: BoxFit.cover),
+          border: Border.all(color: sideColor),
+          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+        ),
+      ),
+    ),
+  );
+  }
+
+  Widget menuButton(BuildContext context,String btnText,Color sideColor) {
+    return Padding(
+      padding: const EdgeInsets.all(2.5),
+      child: Container(
+        height: double.infinity,
+        child: Center(child: Text(btnText, style: context.theme.textTheme.headline5,)),
+        decoration: BoxDecoration(
+          color: btnSurfaceColor,
+          border: Border.all(color: sideColor),
+          borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+        ),
+      ),
+    );
+  }
 }
 
-
-
-/* Expanded(flex: 1,child: SizedBox(
-                        height: context.dynamicHeigh(0.2),
-                          child: Card(
-                            semanticContainer: true,
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            child: Image.network("https://picsum.photos/200", fit: BoxFit.cover,),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0),),
-                          ),
-                        ),
-                      ),
-                      Expanded(flex: 1,child: SizedBox(
-                        height: context.dynamicHeigh(0.2),
-                          child: Card(
-                            semanticContainer: true,
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            child: Image.network("https://picsum.photos/200", fit: BoxFit.cover,),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0),),
-                          ),
-                        ),
-                      ),*/
-
-
-
-
-                    
-                   // Expanded(flex: 1, child: SizedBox(height: context.dynamicHeigh(0.25), child: Card(color: Colors.red,),)),
-                   // Expanded(flex: 3, child: SizedBox(height: context.dynamicHeigh(0.25), child: Card(color: Colors.red,),)),
-
-//Expanded(flex: 2, child: CircleAvatar(radius: 40,foregroundImage: NetworkImage("https://picsum.photos/200"),)),
-
-/*                    Expanded(flex: 2,child: SizedBox(
-                      height: 100,
-                        child: Card(
-                          semanticContainer: true,
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          child: Image.network("https://picsum.photos/200", fit: BoxFit.cover,),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0),),
-                        ),
-                      ),
-                    ),*/
