@@ -3,24 +3,28 @@ class Character {
   late String name;
   late String image;
   late int hp;   //durumlara göre belirlencek
+  late int bagSize;
   late double hungerRate;
   late double tirednessRate;
   late double sicknessRate;
+  late double injuryRate;
   late String mood = "";   //readonly
 
-  Character({required int id,required String name,required String image, required double hungerRate, required double tirednessRate, required double sicknessRate}){
+  Character({required int id,required String name,required String image, required double hungerRate, required double tirednessRate, required double sicknessRate, required double injuryRate  ,required int bagSize}){
     this.id = id;
     this.name=name;
     this.image=image;
     this.hungerRate=hungerRate;
     this.tirednessRate=tirednessRate;
     this.sicknessRate=sicknessRate;
-    calculateHp(hungerRate, tirednessRate, sicknessRate);
+    this.injuryRate=injuryRate;
+    this.bagSize=bagSize;
+    calculateHp(hungerRate, tirednessRate, sicknessRate, injuryRate);
     calculateMood();
   }
 
-  void calculateHp(double hunger,double tired,double sick) {
-    this.hp = 100 - (100 - ((130 * sick) + (90 * hunger) + (80 * tired))/3).toInt();
+  void calculateHp(double hunger,double tired,double sick, double injury) {
+    this.hp = 100 - (100 - ((120 * sick) + (120 * injury ) + (90 * hunger) + (70 * tired))/4).toInt();
   }
 
   void calculateMood(){
@@ -50,7 +54,7 @@ class Character {
     }else{
       tired=statTired[3];
     }
-      mood+=" ,"+tired;
+      mood+=", "+tired;
 
     List<String> statSickness =["Very Healty", "Healty", "Ill", "terminally ill"];
     String sick="";
@@ -63,7 +67,20 @@ class Character {
     }else{
       sick=statSickness[3];
     }
-      mood+=" ,"+sick;
+      mood+=", "+sick;
+
+    List<String> statInjury =["",", Injured",", Badly Wounded",", Fatally Injured"];
+    String injury="";
+    if (tirednessRate>=0.75) {
+      injury=statInjury[0];
+    }else if(tirednessRate>=0.50){
+      injury=statInjury[1];
+    }else if(tirednessRate>=0.25){
+      injury=statInjury[2];
+    }else{
+      injury=statInjury[3];
+    }
+      mood+=injury;
 
 
 

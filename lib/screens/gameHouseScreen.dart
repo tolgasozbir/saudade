@@ -1,4 +1,6 @@
 
+
+
 import 'package:flutter/material.dart';
 import 'package:saudade/contextExtension.dart';
 import 'package:saudade/models/character.dart';
@@ -17,20 +19,28 @@ class _GameHouseScreenState extends State<GameHouseScreen> {
   Color sideColorYellow = Color(0xFFfcba03);
   Color btnSurfaceColor = Color(0xFF545454);
 
-  Character c1 = new Character(id: 1,name: "Tolga", image: "", hungerRate: 1, tirednessRate: 1, sicknessRate: 1);
-  Character c2 = new Character(id: 2,name: "Levent", image: "", hungerRate: 0.9, tirednessRate: 0.75, sicknessRate: 0.95);
-  Character c3 = new Character(id: 3,name: "Bilo", image: "", hungerRate: 0.9, tirednessRate: 0.7, sicknessRate: 0.95);
-  late Character selectedChar;
-
+  Character c1 = new Character(id: 1,name: "Tolga", image: "", hungerRate: 0.7, tirednessRate: 0.7, sicknessRate: 0.9, injuryRate: 0.5 ,bagSize: 12);
+  Character c2 = new Character(id: 2,name: "Levent", image: "", hungerRate: 0.9, tirednessRate: 0.75, sicknessRate: 0.95, injuryRate: 0.1, bagSize: 10);
+  Character c3 = new Character(id: 3,name: "Bilo", image: "", hungerRate: 0.9, tirednessRate: 0.9, sicknessRate: 0.75,injuryRate: 0.05 , bagSize: 15);
+  dynamic selectedMenu;
+  bool isShowingInv = false;
+  String selectedItemTxt = "";
   final img = "https://picsum.photos/200";
 
-  dynamic showMenu;
+  List<String> itemNameList = [
+    "Scrap","Circuit","Wood",
+    "Bandage","Pills","Medical Herb","Ointment",
+    "Canned Food","Cooked Meal","Raw Food",
+  ];
 
-
+  List<int> itemAmount = [
+    0,0,0,
+    0,0,0,0,
+    0,0,0,
+  ];
+  
   @override
   Widget build(BuildContext context) {
-
-    selectedChar=c1;
 
     return Scaffold(
       body: SafeArea(
@@ -50,13 +60,13 @@ class _GameHouseScreenState extends State<GameHouseScreen> {
                 Expanded(
                   child: Row(
                     children: [
-                      Expanded(flex: 1,child: GestureDetector(child: portrait(context, sideColorYellow),onTap: (){print(c1.hungerRate); setState(() {}); },)),
-                      //Expanded(flex: 1,child: GestureDetector(child: portrait(context, sideColorYellow),onTap: (){print(c2.hp); },)),
-                      //Expanded(flex: 1,child: GestureDetector(child: portrait(context, sideColorYellow),onTap: (){print(c3.hp); },)),
+                      Expanded(flex: 1,child: GestureDetector(child: portrait(context, sideColorYellow),onTap: (){selectedMenu=characterInfo(context,c1); isShowingInv = false;setState(() {}); },)),
+                      Expanded(flex: 1,child: GestureDetector(child: portrait(context, sideColorYellow),onTap: (){selectedMenu=characterInfo(context,c2); isShowingInv = false;setState(() {}); },)),
+                      Expanded(flex: 1,child: GestureDetector(child: portrait(context, sideColorYellow),onTap: (){selectedMenu=characterInfo(context,c3); isShowingInv = false; setState(() {}); },)),
                      ////         Day-Time    //// düzenle
                       Expanded(flex: 1,child: clockduzenlencek(context),),
 
-                      Expanded(flex: 2,child: menuButton(context, "Inventory",sideColorAmber)),
+                      Expanded(flex: 2,child: GestureDetector(child: menuButton(context, "Inventory",sideColorAmber), onTap: (){selectedMenu=showInventory(context); isShowingInv = true;  setState(() {}); },)),
                       Expanded(flex: 1, child: menuButton(context,"Exit",sideColorRed)),
                     ],
                   ),
@@ -68,10 +78,17 @@ class _GameHouseScreenState extends State<GameHouseScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Container(
-                      width: context.dynamicWidth(1),
-                      color: Colors.white30,
-                      child: characterInfo(context, selectedChar),      /////////////////////
-                    ),
+                      color: Colors.grey,
+                      child: isShowingInv == true ? 
+                      Row(
+                        children: [
+                          Expanded(flex: 4, child: selectedMenu ?? Container(child: Text("Boş"),),),
+                          Expanded(flex: 3, child: Container(height: double.infinity, color: Colors.redAccent, child: Text(selectedItemTxt),),),
+                        ],
+                      ) :
+                      selectedMenu,
+
+                    )
                   ),
                 ),
 
@@ -88,6 +105,7 @@ class _GameHouseScreenState extends State<GameHouseScreen> {
                   ],
                 ),
               ),
+
               ],
             ),
           ),
@@ -96,20 +114,57 @@ class _GameHouseScreenState extends State<GameHouseScreen> {
     );
   }
 
+  Widget showInventory(BuildContext context) {
+    return SingleChildScrollView(
+        physics: ScrollPhysics(),
+        child: Column(
+          children: <Widget>[
+            Text("Inventory" , style: context.theme.textTheme.headline5?.copyWith(color: Colors.white)),
+            
+            GridView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                childAspectRatio: 10/8,
+              ),
+              itemCount: 10,
+              itemBuilder: (BuildContext context, int index) {
+                return Column(
+                  children: [
+                    Expanded(flex: 5, child: GestureDetector(child: Card(color: Colors.black12, child: Image.asset("assets/scrap.png",fit: BoxFit.fill,),),onTap: (){selectedItemTxt=itemNameList[index]; setState(() {}); },)),
+                    Expanded(child: Text(itemNameList[index] + " x" +itemAmount[index].toString())), 
+                  ],
+                );
+              },
+            ),
+          ],
+        ),
+      );
+  }
+
 
   Widget characterInfo(BuildContext context,Character char){
-    return ListView(
-      children: [
-        Center(child: Text("${char.name}" , style: context.theme.textTheme.headline5?.copyWith(color: Colors.white))),
-        Center(child: Text("Health : ${char.hp}" , style: context.theme.textTheme.headline6?.copyWith(color: Colors.white))),
-        Text(""),
-        Center(child: Text("Mood : ${char.mood}" , style: context.theme.textTheme.headline6?.copyWith(color: Colors.white))),
-
-
-
-        //Center(child: Text("${char.name}'s Journal" , style: context.theme.textTheme.headline5?.copyWith(color: Colors.white))),    
-      ],
-    );
+    return SingleChildScrollView(
+        physics: ScrollPhysics(),
+        child: Column(
+          children: <Widget>[
+            Text("${char.name}" , style: context.theme.textTheme.headline5?.copyWith(color: Colors.white)),
+            Text("Mood : ${char.mood}" , style: context.theme.textTheme.headline6?.copyWith(color: Colors.white)),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("${char.name}'s Journal" , style: context.theme.textTheme.headline5?.copyWith(color: Colors.white)),
+            ),
+            ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount:20,
+              itemBuilder: (context,index){
+                return  Center(child: Text('Some text'));
+            }),
+          ],
+        ),
+      );
   }
 
   SizedBox clockduzenlencek(BuildContext context) {
@@ -161,3 +216,8 @@ class _GameHouseScreenState extends State<GameHouseScreen> {
   }
 }
 
+ /*Expanded(flex: 1, child: Text("${char.name}" , style: context.theme.textTheme.headline5?.copyWith(color: Colors.white))),
+        //Expanded(child: Center(child: Text("Health : ${char.hp}" , style: context.theme.textTheme.headline6?.copyWith(color: Colors.white)))),
+        Expanded(flex: 2, child: Center(child: Text("Mood : ${char.mood}" , style: context.theme.textTheme.headline6?.copyWith(color: Colors.white)))),
+        Expanded(flex: 2, child: Center(child: Text("${char.name}'s Journal" , style: context.theme.textTheme.headline5?.copyWith(color: Colors.white)))),
+        */
