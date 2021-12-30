@@ -24,7 +24,7 @@ class Character {
   }
 
   void calculateHp(double hunger,double tired,double sick, double injury) {
-    this.hp = 100 - (100 - ((120 * sick) + (120 * injury ) + (90 * hunger) + (70 * tired))/4).toInt();
+    this.hp = 100 - (100 - ((120 * sick) + (120 * injury ) + (90 * hunger) + (70 * tired))/4).toInt();  //tekrar hesaplancak herhangi birisi 0 olduğunca ölcek
   }
 
   void calculateMood(){
