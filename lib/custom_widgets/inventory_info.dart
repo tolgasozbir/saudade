@@ -85,10 +85,16 @@ class _InventoryInfoState extends State<InventoryInfo> {
 
   Container itemDetailRightSide() {                     //TODO: Düzenlencek detay kısmı
     return Container(
-        height: double.infinity,
-        color: Colors.redAccent,
-        child: Text(ItemList.selectedItem == null ? "" : ItemList.selectedItem!.name ));
+      height: double.infinity,
+      color: Color(0x0FFFFFFF),
+      child: Column(
+        children: [
+          Text("${ItemList.selectedItem.name}",style: context.theme.textTheme.headline5?.copyWith(color: Colors.white)),
+          Expanded(child: Image.asset("${ItemList.selectedItem.image}")),
+          Expanded(child: Text("${ItemList.selectedItem.itemDetail}",style: context.theme.textTheme.headline6?.copyWith(color: Colors.white))),
+        ],
+      )
+    );
   }
-
 
 }

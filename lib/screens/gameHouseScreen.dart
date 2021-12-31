@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:saudade/contextExtension.dart';
 import 'package:saudade/custom_widgets/character_info.dart';
+import 'package:saudade/custom_widgets/day_indicator.dart';
 import 'package:saudade/custom_widgets/inventory_info.dart';
 import 'package:saudade/custom_widgets/menu_button.dart';
 import 'package:saudade/custom_widgets/portrait.dart';
@@ -17,8 +18,16 @@ class GameHouseScreen extends StatefulWidget {
   _GameHouseScreenState createState() => _GameHouseScreenState();
 }
 
+
 class _GameHouseScreenState extends State<GameHouseScreen> {
-  
+
+  @override
+  void initState() {
+    super.initState();
+    ItemList.selectedItem=ItemList().itemList[0];
+
+  }
+
   Character c1 = new Character(id: 1,name: "Tolga", image: "", hungerRate: 0.5, tirednessRate: 0.7, sicknessRate: 0.9, injuryRate: 0.5 ,bagSize: 12);
   Character c2 = new Character(id: 2,name: "Levent", image: "", hungerRate: 0.9, tirednessRate: 0.75, sicknessRate: 0.95, injuryRate: 0.1, bagSize: 10);
   Character c3 = new Character(id: 3,name: "Bilo", image: "", hungerRate: 0.5, tirednessRate: 0.5, sicknessRate: 0.5,injuryRate: 0.5 , bagSize: 15);
@@ -50,7 +59,7 @@ class _GameHouseScreenState extends State<GameHouseScreen> {
                       Expanded(flex: 1,child: portrait(c2)),
                       Expanded(flex: 1,child: portrait(c3)),
                        ////         Day-Time    //// düzenle
-                      Expanded(flex: 1,child: clockduzenlencek(context),),  //TODO: Saat kısmı düzenlencek
+                      Expanded(flex: 1,child: DayIndicator()),  //TODO: Saat kısmı düzenlencek
 
                       Expanded(flex: 2,child: MenuButton(
                         btnText: "Inventory",
@@ -128,21 +137,6 @@ class _GameHouseScreenState extends State<GameHouseScreen> {
     );
   }
 
-
-
-  SizedBox clockduzenlencek(BuildContext context) {
-    return SizedBox(
-                      height: context.dynamicHeight(0.2),
-                        child: Card(color: Color(0xFF444444),
-                          child: Column(
-                            children: [
-                              Expanded(child: Center(child: Text("Day 1"))),
-                              Expanded(child: Center(child: Text("12:30"))),
-                            ],
-                          ),
-                        ),
-                      );
-  }
 
   void showMenu(Widget widget) {
     setState(() {
