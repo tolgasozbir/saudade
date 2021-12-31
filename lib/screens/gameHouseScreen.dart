@@ -19,30 +19,12 @@ class GameHouseScreen extends StatefulWidget {
 
 class _GameHouseScreenState extends State<GameHouseScreen> {
   
-  Color sideColorRed = Color(0xFF8D021F);
-  Color sideColorAmber = Color(0xFFcd853f);
-  Color btnSurfaceColor = Color(0xFF545454);
-
   Character c1 = new Character(id: 1,name: "Tolga", image: "", hungerRate: 0.5, tirednessRate: 0.7, sicknessRate: 0.9, injuryRate: 0.5 ,bagSize: 12);
   Character c2 = new Character(id: 2,name: "Levent", image: "", hungerRate: 0.9, tirednessRate: 0.75, sicknessRate: 0.95, injuryRate: 0.1, bagSize: 10);
   Character c3 = new Character(id: 3,name: "Bilo", image: "", hungerRate: 0.5, tirednessRate: 0.5, sicknessRate: 0.5,injuryRate: 0.5 , bagSize: 15);
   dynamic selectedMenu;
-  bool isShowingInv = false;
-  String selectedItemTxt = "";
   final img = "https://picsum.photos/200";
 
-  List<String> itemNameList = [
-    "Scrap","Circuit","Wood",
-    "Bandage","Pills","Medical Herb","Ointment",
-    "Canned Food","Cooked Meal","Raw Food",
-  ];
-
-  List<int> itemAmount = [
-    0,0,0,
-    0,0,0,0,
-    0,0,0,
-  ];
-  
   @override
   Widget build(BuildContext context) {
 
@@ -68,27 +50,12 @@ class _GameHouseScreenState extends State<GameHouseScreen> {
                       Expanded(flex: 1,child: portrait(c2)),
                       Expanded(flex: 1,child: portrait(c3)),
                        ////         Day-Time    //// düzenle
-                      Expanded(flex: 1,child: clockduzenlencek(context),),
-
-
-
-
-
-
-
-
-
-
-
-
+                      Expanded(flex: 1,child: clockduzenlencek(context),),  //TODO: Saat kısmı düzenlencek
 
                       Expanded(flex: 2,child: MenuButton(
                         btnText: "Inventory",
-                        onTap: () {
-                          isShowingInv = true;
-                          showMenu(InventoryInfo());
-                        },
-                      )), //item dışarda tanımlancak her yerden erişilcek
+                        onTap: () =>showMenu(InventoryInfo()),
+                      )),
                       
                       
                       
@@ -123,15 +90,8 @@ class _GameHouseScreenState extends State<GameHouseScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Container(
-                      color: Colors.grey,
-                      child: isShowingInv == true ? 
-                      Row(
-                        children: [
-                          Expanded(flex: 4, child: selectedMenu ?? Container(child: Text("Boş"),),),
-                          Expanded(flex: 3, child: Container(height: double.infinity, color: Colors.redAccent, child: Text(ItemList.selectedItem.name)),),
-                        ],
-                      ) :
-                      selectedMenu,
+                      //color: Colors.grey,
+                      child: selectedMenu,
 
                     )
                   ),
@@ -163,7 +123,6 @@ class _GameHouseScreenState extends State<GameHouseScreen> {
     return Portrait(
       image: img,
       onTap: () {
-        isShowingInv = false;
         showMenu(CharacterInfo(char: char));
       },
     );
