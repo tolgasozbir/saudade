@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:saudade/contextExtension.dart';
 import 'package:saudade/custom_widgets/character_info.dart';
@@ -7,8 +6,6 @@ import 'package:saudade/custom_widgets/inventory_info.dart';
 import 'package:saudade/custom_widgets/menu_button.dart';
 import 'package:saudade/custom_widgets/portrait.dart';
 import 'package:saudade/models/character.dart';
-import 'package:saudade/models/item.dart';
-
 import '../item_list.dart';
 
 class GameHouseScreen extends StatefulWidget {
@@ -24,7 +21,7 @@ class _GameHouseScreenState extends State<GameHouseScreen> {
   @override
   void initState() {
     super.initState();
-    ItemList.selectedItem=ItemList().itemList[0];
+    ItemList.selectedItem=ItemList().myInvItemList[0];
 
   }
 
@@ -142,13 +139,6 @@ class _GameHouseScreenState extends State<GameHouseScreen> {
     setState(() {
       this.selectedMenu=widget;
     });
-
-    List<Item> x = ItemList().itemList;
-    for (var item in x) {
-      if (item.name=="scrap") {
-        print("burdaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-      }
-    }
   }
 
 }

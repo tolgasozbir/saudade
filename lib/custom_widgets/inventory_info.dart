@@ -14,12 +14,9 @@ class InventoryInfo extends StatefulWidget {
 class _InventoryInfoState extends State<InventoryInfo> {
   @override
   Widget build(BuildContext context) {
-
-    //final List<Item> inventoryItemList = ItemList().itemList; //TODO: SİL
-
     return Row(
       children: [
-        Expanded(flex: 4, child: inventoryLeftSide(context, ItemList().itemList)),
+        Expanded(flex: 4, child: inventoryLeftSide(context, ItemList().myInvItemList)),
         Expanded(flex: 3, child: itemDetailRightSide()),
       ],
     );
@@ -73,9 +70,7 @@ class _InventoryInfoState extends State<InventoryInfo> {
           child: Image.asset("${inventoryItemList[index].image}", fit: BoxFit.cover),
         ),
       ),
-      onTap: () => setState(() {
-        ItemList.selectedItem = inventoryItemList[index];
-      }),
+      onTap: () => setState(() { ItemList.selectedItem = inventoryItemList[index]; }),
     );
   }
 
@@ -83,15 +78,15 @@ class _InventoryInfoState extends State<InventoryInfo> {
     return Text(inventoryItemList[index].name + " x" + inventoryItemList[index].amount.toString());
   }
 
-  Container itemDetailRightSide() {                     //TODO: Düzenlencek detay kısmı
+  Container itemDetailRightSide() {
     return Container(
       height: double.infinity,
       color: Color(0x0FFFFFFF),
       child: Column(
         children: [
           Text("${ItemList.selectedItem.name}",style: context.theme.textTheme.headline5?.copyWith(color: Colors.white)),
-          Expanded(child: Image.asset("${ItemList.selectedItem.image}")),
-          Expanded(child: Text("${ItemList.selectedItem.itemDetail}",style: context.theme.textTheme.headline6?.copyWith(color: Colors.white))),
+          Expanded(flex: 6, child: Image.asset("${ItemList.selectedItem.image}")),
+          Expanded(flex: 4, child: Text("${ItemList.selectedItem.itemDetail}",style: context.theme.textTheme.headline6?.copyWith(color: Colors.white))),
         ],
       )
     );

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:saudade/contextExtension.dart';
 
@@ -14,7 +15,8 @@ class MainScreen extends StatelessWidget {
 
               ElevatedButton(
                 child: Container(
-                  width: context.dynamicWidth(0.6),
+                  width: context.dynamicWidth(0.32),
+                  height: context.dynamicHeight(0.16),
                   child: Center(child: Text("New Game", style: context.theme.textTheme.headline5,))),
                 onPressed: (){
                   Navigator.pushNamed(context, "gameHouseScreen");
@@ -31,7 +33,8 @@ class MainScreen extends StatelessWidget {
 
               ElevatedButton(
                 child: Container(
-                  width: context.dynamicWidth(0.6),
+                  width: context.dynamicWidth(0.32),
+                  height: context.dynamicHeight(0.16),
                   child: Center(child: Text("Exit", style: context.theme.textTheme.headline5,))),
                 onPressed: (){
                   
