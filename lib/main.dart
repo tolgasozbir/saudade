@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:saudade/screens/gameHouseScreen.dart';
+import 'package:saudade/characterList.dart';
+import 'package:saudade/screens/houseScreen.dart';
 import 'package:saudade/screens/mainScreen.dart';
+import 'package:saudade/screens/preparingScreen.dart';
 import 'package:saudade/screens/splashScreen.dart';
 
 void main() {
@@ -26,7 +28,8 @@ class MyApp extends StatelessWidget {
       routes: {
         "/" : (context) => SplashScreen(),
         "mainScreen" : (context) => MainScreen(),
-        "gameHouseScreen" : (context) => GameHouseScreen(),
+        "houseScreen" : (context) => HouseScreen(),
+        "preparingScreen" : (context) => PreparingScreen(c1: CharacterList.c1, c2: CharacterList.c2, c3: CharacterList.c3,),
       },
     );
   }

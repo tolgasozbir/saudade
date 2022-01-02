@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:saudade/contextExtension.dart';
 
 class Portrait extends StatelessWidget {
-  const Portrait({required this.onTap, required this.image, Key? key}) : super(key: key);
+  const Portrait({this.height, required this.onTap, required this.image, Key? key}) : super(key: key);
 
   final String image;
   final VoidCallback onTap;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class Portrait extends StatelessWidget {
       child: Padding(
       padding: const EdgeInsets.all(4.0),
       child: SizedBox(
-        height: context.dynamicHeight(0.2),
+        height: context.dynamicHeight(height ?? 0.2),
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(

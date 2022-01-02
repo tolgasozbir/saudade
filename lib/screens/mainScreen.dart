@@ -19,7 +19,7 @@ class MainScreen extends StatelessWidget {
                   height: context.dynamicHeight(0.16),
                   child: Center(child: Text("New Game", style: context.theme.textTheme.headline5,))),
                 onPressed: (){
-                  Navigator.pushNamed(context, "gameHouseScreen");
+                  Navigator.pushNamed(context, "houseScreen");
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Color(0xFF545454),

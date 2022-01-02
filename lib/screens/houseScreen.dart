@@ -6,17 +6,18 @@ import 'package:saudade/custom_widgets/inventory_info.dart';
 import 'package:saudade/custom_widgets/menu_button.dart';
 import 'package:saudade/custom_widgets/portrait.dart';
 import 'package:saudade/models/character.dart';
+import '../characterList.dart';
 import '../item_list.dart';
 
-class GameHouseScreen extends StatefulWidget {
-  const GameHouseScreen({ Key? key }) : super(key: key);
+class HouseScreen extends StatefulWidget {
+  const HouseScreen({ Key? key }) : super(key: key);
 
   @override
-  _GameHouseScreenState createState() => _GameHouseScreenState();
+  _HouseScreenState createState() => _HouseScreenState();
 }
 
-
-class _GameHouseScreenState extends State<GameHouseScreen> {
+//TODO: preparing ekranında back tuşu çalışmasın
+class _HouseScreenState extends State<HouseScreen> {
 
   @override
   void initState() {
@@ -25,9 +26,6 @@ class _GameHouseScreenState extends State<GameHouseScreen> {
 
   }
 
-  Character c1 = new Character(id: 1,name: "Tolga", image: "", hungerRate: 0.5, tirednessRate: 0.7, sicknessRate: 0.9, injuryRate: 0.5 ,bagSize: 12);
-  Character c2 = new Character(id: 2,name: "Levent", image: "", hungerRate: 0.9, tirednessRate: 0.75, sicknessRate: 0.95, injuryRate: 0.1, bagSize: 10);
-  Character c3 = new Character(id: 3,name: "Bilo", image: "", hungerRate: 0.5, tirednessRate: 0.5, sicknessRate: 0.5,injuryRate: 0.5 , bagSize: 15);
   dynamic selectedMenu;
   final img = "https://picsum.photos/200";
 
@@ -52,9 +50,9 @@ class _GameHouseScreenState extends State<GameHouseScreen> {
                 Expanded(
                   child: Row(
                     children: [
-                      Expanded(flex: 1,child: portrait(c1)),
-                      Expanded(flex: 1,child: portrait(c2)),
-                      Expanded(flex: 1,child: portrait(c3)),
+                      Expanded(flex: 1,child: portrait(CharacterList.c1)),
+                      Expanded(flex: 1,child: portrait(CharacterList.c2)),
+                      Expanded(flex: 1,child: portrait(CharacterList.c3)),
                        ////         Day-Time    //// düzenle
                       Expanded(flex: 1,child: DayIndicator()),  //TODO: Saat kısmı düzenlencek
 

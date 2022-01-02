@@ -18,11 +18,11 @@ class _DayIndicatorState extends State<DayIndicator> {
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(Duration(seconds: 10), (timer) {
+    timer = Timer.periodic(Duration(milliseconds: 300), (timer) {
       hour+=1;
       if (hour==24) {
         timer.cancel();
-        //Navigator.pushNamed(context, "/"); //TODO: 2. state e geçicek
+        Navigator.pushNamed(context, "preparingScreen");
       }
       setState(() {});    
     });
