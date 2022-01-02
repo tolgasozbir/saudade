@@ -35,7 +35,6 @@ class _PreparingScreenState extends State<PreparingScreen> {
 
   Container buildBody() {
     return Container(
-      color: Colors.black38,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
@@ -79,6 +78,10 @@ class _PreparingScreenState extends State<PreparingScreen> {
       onTap: (){
         GameMechanics gameMechanics= GameMechanics(char1Value,char2Value,char3Value);
         gameMechanics.inNight();
+        Navigator.pushNamed(context, "houseScreen");
+        setState(() {
+          
+        });
       },
     );
   }

@@ -18,7 +18,7 @@ class _DayIndicatorState extends State<DayIndicator> {
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(Duration(milliseconds: 300), (timer) {
+    timer = Timer.periodic(Duration(milliseconds: 500), (timer) {
       hour+=1;
       if (hour==24) {
         timer.cancel();

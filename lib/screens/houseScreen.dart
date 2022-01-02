@@ -127,6 +127,8 @@ class _HouseScreenState extends State<HouseScreen> {
     return Portrait(
       image: img,
       onTap: () {
+        print("Açlık : ${char.hungerRate} Yorgunluk : ${char.tirednessRate} Hataklık : ${char.sicknessRate} Yaralılık : ${char.injuryRate}");
+        print("Hp : ${char.hp}");
         showMenu(CharacterInfo(char: char));
       },
     );
