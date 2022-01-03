@@ -67,7 +67,7 @@ class _InventoryInfoState extends State<InventoryInfo> {
         width: context.dynamicWidth(0.175),
         child: Card(
           color: Color(0x2EFFFFFF),
-          child: Image.asset("${inventoryItemList[index].image}", fit: BoxFit.cover),
+          child: Image.asset("${inventoryItemList[index].image}", fit: BoxFit.contain),
         ),
       ),
       onTap: () => setState(() { ItemList.selectedItem = inventoryItemList[index]; }),

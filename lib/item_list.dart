@@ -22,6 +22,9 @@ class ItemList {
     Item(5, "Pills", 0, "assets/Pills.png","pills make it easier to deal with pain or illness."),
     Item(6, "Medical Herb", 0, "assets/Herbs.png","Medicinal herbs cure diseases, not as effective as medicine."),
     Item(7, "Canned Food", 1, "assets/CannedFood.png","it tastes bad but satisfying meal. You get used to the taste over time."),
+    Item(8, "Cooked Meal", 1, "assets/cookedMeal.png","Cooked meal, more nutritious and tastier."),
+    Item(9, "Raw Food", 1, "assets/rawFood.png","It's edible but would be more nutritious when cooked."),
+    Item(10,"Water",1,"assets/water.png","Clean water. You can drink or prepare a good meal.")
     ];
 
   static late Item selectedItem;

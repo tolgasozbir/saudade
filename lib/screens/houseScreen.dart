@@ -56,39 +56,14 @@ class _HouseScreenState extends State<HouseScreen> {
                        ////         Day-Time    //// düzenle
                       Expanded(flex: 1,child: DayIndicator()),  //TODO: Saat kısmı düzenlencek
 
-                      Expanded(flex: 2,child: MenuButton(
-                        btnText: "Inventory",
-                        onTap: () =>showMenu(InventoryInfo()),
-                      )),
+                      Expanded(flex: 2,child: MenuButton(btnText: "Inventory",onTap: () =>showMenu(InventoryInfo()))),
                       
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
+                          
                       Expanded(flex: 1, child: MenuButton(btnText: "Exit",borderColor: Color(0xFF8D021F), borderWidth: 2, onTap: (){print("Exit");},)),
                     ],
                   ),
                 ),
 
-//selectedMenu=showInventory(context); isShowingInv = true;
                 ///     orta alan   ///
                 Expanded( flex: 3,
                   child: Padding(
@@ -96,7 +71,6 @@ class _HouseScreenState extends State<HouseScreen> {
                     child: Container(
                       //color: Colors.grey,
                       child: selectedMenu,
-
                     )
                   ),
                 ),
@@ -106,9 +80,11 @@ class _HouseScreenState extends State<HouseScreen> {
               Expanded( flex: 1,
                 child: Row(
                   children: [
-                    Expanded(flex: 2, child: MenuButton(onTap: null, btnText: "Craft")),
+                    Expanded(flex: 3, child: MenuButton(onTap: null, btnText: "Craft")),
                     Expanded(flex: 2, child: MenuButton(onTap: null, btnText: "Cook")),
                     Expanded(flex: 2, child: MenuButton(onTap: null, btnText: "Traps")),
+                    Expanded(flex: 2, child: MenuButton(onTap: null, btnText: "Radio")),
+                    Expanded(flex: 2, child: MenuButton(onTap: null, btnText: "Heater")),
                     Expanded(flex: 2, child: MenuButton(onTap: null, btnText: "Info")),
                     Expanded(flex: 3, child: MenuButton(onTap: null, btnText: "Finish")),   //border color ver özel
                   ],
