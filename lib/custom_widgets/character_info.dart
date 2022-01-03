@@ -1,8 +1,9 @@
 import 'dart:ui';
 
-import 'package:saudade/contextExtension.dart';
+import 'package:saudade/utils/characterList.dart';
+import 'package:saudade/utils/contextExtension.dart';
 import 'package:flutter/material.dart';
-import 'package:saudade/item_list.dart';
+import 'package:saudade/utils/item_list.dart';
 import 'package:saudade/models/character.dart';
 import 'package:saudade/models/item.dart';
 
@@ -18,33 +19,67 @@ class CharacterInfo extends StatefulWidget {
 class _CharacterInfoState extends State<CharacterInfo> {
   @override
   Widget build(BuildContext context) {
-return SingleChildScrollView(
-        physics: ScrollPhysics(),
-        child: Column(
-          children: <Widget>[
-            Text("${widget.char.name}" , style: context.theme.textTheme.headline5?.copyWith(color: Colors.white)),
-            Text("Mood : ${widget.char.mood}" , style: context.theme.textTheme.headline6?.copyWith(color: Colors.white)),
-            SizedBox(height: 12,),
-            feedRowButtons(context),
-            JournalText(context),
-            listViewBuilder(),
-          ],
-        ),
+
+    CharacterList.isAlive(widget.char);
+    CharacterList.calculateMood(widget.char);
+
+    return SingleChildScrollView(
+      physics: ScrollPhysics(),
+      child: Column(
+        children: <Widget>[
+          Text("${widget.char.name}" , style: context.theme.textTheme.headline5?.copyWith(color: Colors.white,fontSize: 30)),
+          Text("Mood : ${widget.char.mood}" , style: context.theme.textTheme.headline5?.copyWith(color: Colors.white)),
+          SizedBox(height: 12,),
+          feedRowButtonsFirst(context),
+          SizedBox(height: 8,),
+          feedRowButtonsSecond(context),
+          JournalText(context),
+          listViewBuilder(),
+        ],
+      ),
+    );
+  }
+
+  Row feedRowButtonsFirst(BuildContext context) {
+    return Row(mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        widget.char.thirstinessRate>=25 ? feedButton(context,ItemList.allItemList[9]) : const SizedBox(),
+        widget.char.hungerRate>=25 ? isHungry(context) : const SizedBox(),
+      ],
+    );
+  }
+
+  Row isHungry(BuildContext context) {
+    return Row(
+        children: [
+          const SizedBox(width: 4,),
+          feedButton(context,ItemList.allItemList[6]),
+          const SizedBox(width: 4,),
+          feedButton(context,ItemList.allItemList[7]),
+          const SizedBox(width: 4,),
+          feedButton(context,ItemList.allItemList[8]),
+        ],
       );
   }
 
-  Row feedRowButtons(BuildContext context) {
+  Row feedRowButtonsSecond(BuildContext context) {
     return Row(mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        feedButton(context,ItemList.allItemList[9]),
-        const SizedBox(width: 4,),
-        feedButton(context,ItemList.allItemList[6]),
-        const SizedBox(width: 4,),
-        feedButton(context,ItemList.allItemList[7]),
-        const SizedBox(width: 4,),
-        feedButton(context,ItemList.allItemList[8]),
+        widget.char.injuryRate>=25 ? feedButton(context,ItemList.allItemList[3]): const SizedBox(),
+        widget.char.sicknessRate>=25 ? isSick(context): const SizedBox(),
       ],
     );
+  }
+
+  Row isSick(BuildContext context) {
+    return Row(
+        children: [
+          const SizedBox(width: 4,),
+          feedButton(context,ItemList.allItemList[4]),
+          const SizedBox(width: 4,),
+          feedButton(context,ItemList.allItemList[5]),
+        ],
+      );
   }
 
       //TODO: ses eklencek ve yediği şeye göre stat artcak

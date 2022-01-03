@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:saudade/characterList.dart';
+import 'package:saudade/utils/characterList.dart';
 import 'package:saudade/screens/houseScreen.dart';
 import 'package:saudade/screens/mainScreen.dart';
 import 'package:saudade/screens/preparingScreen.dart';
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       title: 'Saudade',
       theme: ThemeData.dark(),
       //theme: ThemeData(brightness: Brightness.dark,),
-      initialRoute: "/",
+      initialRoute: "houseScreen",  // "/"
       routes: {
         "/" : (context) => SplashScreen(),
         "mainScreen" : (context) => MainScreen(),

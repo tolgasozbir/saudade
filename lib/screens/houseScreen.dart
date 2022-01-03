@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:saudade/contextExtension.dart';
+import 'package:saudade/utils/contextExtension.dart';
 import 'package:saudade/custom_widgets/character_info.dart';
 import 'package:saudade/custom_widgets/day_indicator.dart';
 import 'package:saudade/custom_widgets/inventory_info.dart';
 import 'package:saudade/custom_widgets/menu_button.dart';
 import 'package:saudade/custom_widgets/portrait.dart';
 import 'package:saudade/models/character.dart';
-import '../characterList.dart';
-import '../item_list.dart';
+import '../utils/characterList.dart';
+import '../utils/item_list.dart';
 
 class HouseScreen extends StatefulWidget {
   const HouseScreen({ Key? key }) : super(key: key);
@@ -103,8 +103,8 @@ class _HouseScreenState extends State<HouseScreen> {
     return Portrait(
       image: img,
       onTap: () {
-        print("Açlık : ${char.hungerRate} Yorgunluk : ${char.tirednessRate} Hataklık : ${char.sicknessRate} Yaralılık : ${char.injuryRate}");
-        print("Hp : ${char.hp}");
+        print("                     Su${char.thirstinessRate} Açlık : ${char.hungerRate} Yorgunluk : ${char.tirednessRate} Hataklık : ${char.sicknessRate} Yaralılık : ${char.injuryRate}");
+        print("isAlive? : ${char.isAlive}");
         showMenu(CharacterInfo(char: char));
       },
     );

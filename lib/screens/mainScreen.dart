@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:saudade/contextExtension.dart';
+import 'package:saudade/utils/contextExtension.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({ Key? key }) : super(key: key);

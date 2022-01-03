@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:saudade/contextExtension.dart';
-import 'package:saudade/item_list.dart';
+import 'package:saudade/utils/contextExtension.dart';
+import 'package:saudade/utils/item_list.dart';
 import 'package:saudade/models/item.dart';
 
 class InventoryInfo extends StatefulWidget {

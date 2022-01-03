@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:saudade/custom_widgets/portrait.dart';
-import 'package:saudade/game_mechanics.dart';
+import 'package:saudade/utils/game_mechanics.dart';
 import 'package:saudade/models/character.dart';
-import 'package:saudade/contextExtension.dart';
+import 'package:saudade/utils/contextExtension.dart';
 
 class PreparingScreen extends StatefulWidget {
   const PreparingScreen({required this.c1,required this.c2,required this.c3, Key? key}) : super(key: key);

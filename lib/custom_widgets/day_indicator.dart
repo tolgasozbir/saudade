@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:saudade/contextExtension.dart';
+import 'package:saudade/utils/contextExtension.dart';
 
 class DayIndicator extends StatefulWidget {
   const DayIndicator({ Key? key }) : super(key: key);
@@ -18,7 +18,7 @@ class _DayIndicatorState extends State<DayIndicator> {
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(Duration(seconds: 10), (timer) {
+    timer = Timer.periodic(Duration(seconds: 5), (timer) {
       hour+=1;
       if (hour==24) {
         timer.cancel();

@@ -1,6 +1,6 @@
 import 'dart:math';
-import 'package:saudade/characterList.dart';
-import 'package:saudade/item_list.dart';
+import 'package:saudade/utils/characterList.dart';
+import 'package:saudade/utils/item_list.dart';
 import 'package:saudade/models/character.dart';
 
 class GameMechanics {
@@ -17,7 +17,7 @@ class GameMechanics {
 
   void scavenge(Character char){
     print(char.name + " Scavengeeee");
-    char.tirednessRate-=(24+Random().nextInt(37));   ////////////
+    char.tirednessRate-=(24+Random().nextInt(37));   //////////// TODO: düzenle
     Random rnd = Random();
     List<String> foundItemName=[];
     List<int> foundItemAmount=[];
