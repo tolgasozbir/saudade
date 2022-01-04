@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:saudade/utils/contextExtension.dart';
+import 'package:saudade/utils/context_extension.dart';
 import 'package:saudade/custom_widgets/character_info.dart';
 import 'package:saudade/custom_widgets/day_indicator.dart';
 import 'package:saudade/custom_widgets/inventory_info.dart';
 import 'package:saudade/custom_widgets/menu_button.dart';
 import 'package:saudade/custom_widgets/portrait.dart';
 import 'package:saudade/models/character.dart';
-import '../utils/characterList.dart';
+import '../utils/character_list.dart';
 import '../utils/item_list.dart';
 
 class HouseScreen extends StatefulWidget {

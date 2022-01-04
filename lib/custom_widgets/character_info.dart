@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:saudade/utils/characterList.dart';
-import 'package:saudade/utils/contextExtension.dart';
+import 'package:saudade/utils/character_list.dart';
+import 'package:saudade/utils/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:saudade/utils/item_list.dart';
 import 'package:saudade/models/character.dart';

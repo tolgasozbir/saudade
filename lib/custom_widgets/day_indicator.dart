@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:saudade/utils/contextExtension.dart';
+import 'package:saudade/utils/context_extension.dart';
 
 class DayIndicator extends StatefulWidget {
   const DayIndicator({ Key? key }) : super(key: key);

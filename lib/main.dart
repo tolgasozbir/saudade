@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:saudade/utils/characterList.dart';
-import 'package:saudade/screens/houseScreen.dart';
-import 'package:saudade/screens/mainScreen.dart';
-import 'package:saudade/screens/preparingScreen.dart';
-import 'package:saudade/screens/splashScreen.dart';
+import 'package:saudade/utils/character_list.dart';
+import 'package:saudade/screens/house_screen.dart';
+import 'package:saudade/screens/main_screen.dart';
+import 'package:saudade/screens/preparing_screen.dart';
+import 'package:saudade/screens/splash_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

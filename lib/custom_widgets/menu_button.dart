@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:saudade/utils/contextExtension.dart';
+import 'package:saudade/utils/context_extension.dart';
 
 class MenuButton extends StatelessWidget {
   MenuButton({required this.onTap, required this.btnText, this.borderColor, this.borderWidth, Key? key }) : super(key: key);
@@ -13,14 +13,13 @@ class MenuButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final Color surfaceColor=Color(0xFF545454);
 
-    return GestureDetector(
-
+    return InkWell(
       onTap: onTap,
-
       child: Padding(
         padding: const EdgeInsets.all(2.5),
-        child: Container(
-          height: double.infinity,
+        child: Ink(
+          //height: double.infinity,
+          //color: surfaceColor,
           child: Center(child: Text(btnText, style: context.theme.textTheme.headline5,)),
           decoration: BoxDecoration(
             color: surfaceColor,
@@ -30,5 +29,6 @@ class MenuButton extends StatelessWidget {
         ),
       ),
     );
+    
   }
 }
