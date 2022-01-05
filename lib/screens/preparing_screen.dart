@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:saudade/custom_widgets/day_indicator.dart';
 import 'package:saudade/custom_widgets/portrait.dart';
 import 'package:saudade/utils/game_mechanics.dart';
 import 'package:saudade/models/character.dart';
@@ -80,7 +81,7 @@ class _PreparingScreenState extends State<PreparingScreen> {
         gameMechanics.inNight();
         Navigator.pushNamed(context, "houseScreen");
         setState(() {
-          
+          day++;
         });
       },
     );

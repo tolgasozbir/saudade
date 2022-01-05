@@ -14,7 +14,7 @@ class _DayIndicatorState extends State<DayIndicator> {
 
   int hour=08;
   late Timer timer;
-/*
+
   @override
   void initState() {
     super.initState();
@@ -27,7 +27,7 @@ class _DayIndicatorState extends State<DayIndicator> {
       setState(() {});    
     });
   }
-*/
+
 
 
   @override
@@ -39,7 +39,7 @@ class _DayIndicatorState extends State<DayIndicator> {
         shape: Border.all(color: Colors.grey),
         child: Column(
           children: [
-            Expanded(child: Center(child: Text("Day 1",style: context.theme.textTheme.subtitle1))),
+            Expanded(child: Center(child: Text("Day ${day}",style: context.theme.textTheme.subtitle1))),
             Expanded(child: Center(child: Text("${hour}:00",style: context.theme.textTheme.subtitle1!.copyWith(fontSize: 15)))),
             Expanded(child: Center(child: Text("20 °C",style: context.theme.textTheme.subtitle1!.copyWith(fontSize: 14)))),
           ],
@@ -48,3 +48,5 @@ class _DayIndicatorState extends State<DayIndicator> {
     );
   }
 }
+
+int day=1;

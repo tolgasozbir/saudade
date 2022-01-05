@@ -52,7 +52,8 @@ class ItemList {
 
   // Crafting Menu Recipes //
   static List<Map<String,int>> craftRecipes = [
-    {"assets/Scrap.png":20,"assets/circuit.png":12,"assets/Woods.png":10,},
+    {"assets/Scrap.png":0,"assets/circuit.png":0,"assets/Woods.png":2,},
+    {"assets/Scrap.png":24,"assets/circuit.png":12,"assets/Woods.png":16,},
     {"assets/Scrap.png":15,"assets/circuit.png":15,"assets/Woods.png":12,},
     {"assets/Scrap.png":30,"assets/circuit.png":20,"assets/Woods.png":20,},
     {"assets/Scrap.png":20,"assets/circuit.png":5,"assets/Woods.png":15,},
@@ -60,14 +61,15 @@ class ItemList {
     {"assets/Scrap.png":30,"assets/circuit.png":30,"assets/Woods.png":30,}
   ];
 
-  ///   CRAFTİNG MENU ITEMS    ///   TODO: gelişmiş ocak eklencek + fuel
+  ///   CRAFTİNG MENU ITEMS    ///   TODO: gelişmiş ocak eklencek
   static List<Item> craftingItems = [
-    Item(21,"Traps",0,"assets/Herbs.png","Trap for small animals like rats. We simply have to put in some bait and wait."),
-    Item(22,"Radio",0,"assets/circuit.png","We can listen to current news and weather forecasts."),
-    Item(23,"Heater",0,"assets/cookedMeal.png","We can build it so we don't get sick in cold weather"),
-    Item(24,"Comfy Beds",0,"assets/Scrap.png","more comfortable bed offers better sleep"),
-    Item(25,"Strong Door",0,"assets/water.png","We can reinforcing the door and installing a simple alarm system."),
-    Item(26,"Safe Env. ",0,"assets/Herbs.png","Will significantly increase raid defense and help reduce casualties losses.")
+    Item(21,"Fuel",0,"assets/fuel.png","we can burn in the heater to warm up our place, or in the stove to cook food."),
+    Item(22,"Traps",0,"assets/trap.png","Trap for small animals like rats. We simply have to put in some bait and wait."),
+    Item(23,"Radio",0,"assets/radio.png","We can listen to current news and weather forecasts."),
+    Item(24,"Heater",0,"assets/heater.png","We can build it so we don't get sick in cold weather"),
+    Item(25,"Comfy Beds",0,"assets/bed.png","more comfortable bed offers better sleep"),
+    Item(26,"Strong Door",0,"assets/door.png","We can reinforcing the door and installing a simple alarm system."),
+    Item(27,"Safe Env. ",0,"assets/envTrap.png","Will significantly increase raid defense and help reduce casualties losses.")
   ];
 
   List<Item> _craftableItemList = [];

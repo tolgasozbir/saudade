@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:saudade/custom_widgets/cooking.dart';
 import 'package:saudade/custom_widgets/crafting.dart';
+import 'package:saudade/custom_widgets/radio.dart';
+import 'package:saudade/custom_widgets/traps.dart';
 import 'package:saudade/utils/context_extension.dart';
 import 'package:saudade/custom_widgets/character_info.dart';
 import 'package:saudade/custom_widgets/day_indicator.dart';
@@ -84,9 +86,9 @@ class _HouseScreenState extends State<HouseScreen> {
                   children: [
                     Expanded(flex: 3, child: MenuButton(btnText: "Craft",onTap: () => showMenu(Crafting()))),
                     Expanded(flex: 2, child: MenuButton(btnText: "Cook",onTap: () => showMenu(Cooking()))),
-                    ItemList.craftingItems[0].amount == 1 ?  Expanded(flex: 2, child: MenuButton(onTap: null, btnText: "Traps")) : const SizedBox(),
-                    ItemList.craftingItems[1].amount == 1 ?  Expanded(flex: 2, child: MenuButton(onTap: null, btnText: "Radio")) : const SizedBox(),
-                    ItemList.craftingItems[2].amount == 1 ?  Expanded(flex: 2, child: MenuButton(onTap: null, btnText: "Heater")): const SizedBox(),
+                    ItemList.craftingItems[1].amount == 1 ?  Expanded(flex: 2, child: MenuButton(btnText: "Traps", onTap: () => showMenu(Traps()))) : const SizedBox(),
+                    ItemList.craftingItems[2].amount == 1 ?  Expanded(flex: 2, child: MenuButton(btnText: "Radio", onTap: () => showMenu(RadioMenu()))) : const SizedBox(),
+                    ItemList.craftingItems[3].amount == 1 ?  Expanded(flex: 2, child: MenuButton(onTap: null, btnText: "Heater")): const SizedBox(),
                     Expanded(flex: 2, child: MenuButton(onTap: null, btnText: "Info")),
                     Expanded(flex: 3, child: MenuButton(onTap: null, btnText: "Finish")),   //border color ver özel
                   ],

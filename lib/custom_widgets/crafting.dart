@@ -23,22 +23,26 @@ class _CraftingState extends State<Crafting> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(flex: 4, child: craftingLeftSide(ItemList().craftableItemList)),
+        Expanded(flex: 4, child: craftingLeftSide(context)),
         Expanded(flex: 3, child: itemDetailRightSide()),
       ],
     );
   }
 
-  SingleChildScrollView craftingLeftSide(List<Item> cratableItems) {
+  Column craftingLeftSide(BuildContext context) {
+    return Column(
+        children: [
+        Text("Crafting",style: context.theme.textTheme.headline5?.copyWith(color: Colors.white)),
+        Expanded(child: scrollGrid(ItemList().craftableItemList)),
+      ],
+    );
+  }
+
+  Widget scrollGrid(List<Item> cratableItems) {
     return SingleChildScrollView(
       physics: ScrollPhysics(),
-      child: Column(
-        children: [
-          Text("Crafting",style: context.theme.textTheme.headline5?.copyWith(color: Colors.white)),
-          gridViewCard(cratableItems),
-        ],
-      ),
-    );
+      child:gridViewCard(cratableItems),
+      );
   }
 
   GridView gridViewCard(List<Item> cratableItems) {
@@ -170,6 +174,7 @@ class _CraftingState extends State<Crafting> {
       case 24 : value=3;break;
       case 25 : value=4;break;
       case 26 : value=5;break;
+      case 27 : value=6;break;
       default: break;
     }
     return value;
@@ -181,11 +186,22 @@ class _CraftingState extends State<Crafting> {
 
     switch (selectedValue) {
       case 0: {
-        if(ItemList.allItemList[0].amount>=20 && ItemList.allItemList[1].amount>=12 && ItemList.allItemList[2].amount>=10) {
-          ItemList.allItemList[0].amount -= 20;
+        if(ItemList.allItemList[2].amount>=2) {
+          ItemList.allItemList[2].amount -= 2;
+          ItemList.allItemList[10].amount++;
+          ItemList.selectedItem = ItemList().craftableItemList[0];
+          mySnackBar(context, "Craft Succesful", 2);
+        }else{
+          mySnackBar(context, "there is not enough material", 2);
+        }
+      } break; 
+
+      case 1: {
+        if(ItemList.allItemList[0].amount>=24 && ItemList.allItemList[1].amount>=12 && ItemList.allItemList[2].amount>=16) {
+          ItemList.allItemList[0].amount -= 24;
           ItemList.allItemList[1].amount -= 12;
-          ItemList.allItemList[2].amount -= 10;
-          ItemList.craftingItems[0].amount++;
+          ItemList.allItemList[2].amount -= 16;
+          ItemList.craftingItems[1].amount++;
           ItemList.selectedItem = ItemList().craftableItemList[0];
           mySnackBar(context, "Craft Succesful", 2);
         }else{
@@ -193,24 +209,11 @@ class _CraftingState extends State<Crafting> {
         }
       } break;   
 
-      case 1: {
+      case 2: {
         if(ItemList.allItemList[0].amount>=15 && ItemList.allItemList[1].amount>=15 && ItemList.allItemList[2].amount>=12) {
           ItemList.allItemList[0].amount -= 15;
           ItemList.allItemList[1].amount -= 15;
           ItemList.allItemList[2].amount -= 12;
-          ItemList.craftingItems[1].amount++;
-          ItemList.selectedItem = ItemList().craftableItemList[0];
-          mySnackBar(context, "Craft Succesful", 2);
-        }else{
-          mySnackBar(context, "there is not enough material", 2);
-        }
-      } break;
-
-      case 2: {
-        if(ItemList.allItemList[0].amount>=30 && ItemList.allItemList[1].amount>=20 && ItemList.allItemList[2].amount>=20) {
-          ItemList.allItemList[0].amount -= 30;
-          ItemList.allItemList[1].amount -= 20;
-          ItemList.allItemList[2].amount -= 20;
           ItemList.craftingItems[2].amount++;
           ItemList.selectedItem = ItemList().craftableItemList[0];
           mySnackBar(context, "Craft Succesful", 2);
@@ -220,10 +223,10 @@ class _CraftingState extends State<Crafting> {
       } break;
 
       case 3: {
-        if(ItemList.allItemList[0].amount>=20 && ItemList.allItemList[1].amount>=5 && ItemList.allItemList[2].amount>=15) {
-          ItemList.allItemList[0].amount -= 20;
-          ItemList.allItemList[1].amount -= 5;
-          ItemList.allItemList[2].amount -= 15;
+        if(ItemList.allItemList[0].amount>=30 && ItemList.allItemList[1].amount>=20 && ItemList.allItemList[2].amount>=20) {
+          ItemList.allItemList[0].amount -= 30;
+          ItemList.allItemList[1].amount -= 20;
+          ItemList.allItemList[2].amount -= 20;
           ItemList.craftingItems[3].amount++;
           ItemList.selectedItem = ItemList().craftableItemList[0];
           mySnackBar(context, "Craft Succesful", 2);
@@ -233,10 +236,10 @@ class _CraftingState extends State<Crafting> {
       } break;
 
       case 4: {
-        if(ItemList.allItemList[0].amount>=30 && ItemList.allItemList[1].amount>=20 && ItemList.allItemList[2].amount>=20) {
-          ItemList.allItemList[0].amount -= 30;
-          ItemList.allItemList[1].amount -= 20;
-          ItemList.allItemList[2].amount -= 20;
+        if(ItemList.allItemList[0].amount>=20 && ItemList.allItemList[1].amount>=5 && ItemList.allItemList[2].amount>=15) {
+          ItemList.allItemList[0].amount -= 20;
+          ItemList.allItemList[1].amount -= 5;
+          ItemList.allItemList[2].amount -= 15;
           ItemList.craftingItems[4].amount++;
           ItemList.selectedItem = ItemList().craftableItemList[0];
           mySnackBar(context, "Craft Succesful", 2);
@@ -246,11 +249,24 @@ class _CraftingState extends State<Crafting> {
       } break;
 
       case 5: {
+        if(ItemList.allItemList[0].amount>=30 && ItemList.allItemList[1].amount>=20 && ItemList.allItemList[2].amount>=20) {
+          ItemList.allItemList[0].amount -= 30;
+          ItemList.allItemList[1].amount -= 20;
+          ItemList.allItemList[2].amount -= 20;
+          ItemList.craftingItems[5].amount++;
+          ItemList.selectedItem = ItemList().craftableItemList[0];
+          mySnackBar(context, "Craft Succesful", 2);
+        }else{
+          mySnackBar(context, "there is not enough material", 2);
+        }
+      } break;
+
+      case 6: {
         if(ItemList.allItemList[0].amount>=30 && ItemList.allItemList[1].amount>=30 && ItemList.allItemList[2].amount>=30) {
           ItemList.allItemList[0].amount -= 30;
           ItemList.allItemList[1].amount -= 30;
           ItemList.allItemList[2].amount -= 30;
-          ItemList.craftingItems[5].amount++;
+          ItemList.craftingItems[6].amount++;
           ItemList.selectedItem = ItemList().craftableItemList[0];
           mySnackBar(context, "Craft Succesful", 2);
         }else{

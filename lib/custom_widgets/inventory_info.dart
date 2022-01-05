@@ -23,24 +23,25 @@ class _InventoryInfoState extends State<InventoryInfo> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(flex: 4, child: inventoryLeftSide(context, ItemList().myInvItemList)),
+        Expanded(flex: 4, child: inventoryLeftSide(context)),
         Expanded(flex: 3, child: itemDetailRightSide()),
       ],
     );
   }
 
+  Column inventoryLeftSide(BuildContext context) {
+    return Column(
+        children: [
+        Text("Inventory",style: context.theme.textTheme.headline5?.copyWith(color: Colors.white)),
+        Expanded(child: scrollGrid(context, ItemList().myInvItemList)),
+      ],
+    );
+  }
 
-
-
-  SingleChildScrollView inventoryLeftSide(BuildContext context, List<Item> inventoryItemList) {
+  SingleChildScrollView scrollGrid(BuildContext context, List<Item> inventoryItemList) {
     return SingleChildScrollView(
       physics: ScrollPhysics(),
-      child: Column(
-        children: [
-          Text("Inventory",style: context.theme.textTheme.headline5?.copyWith(color: Colors.white)),
-          gridViewCard(inventoryItemList),
-        ],
-      ),
+      child: gridViewCard(inventoryItemList),
     );
   }
 
