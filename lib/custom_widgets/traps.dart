@@ -207,4 +207,4 @@ class TrapProperty {
 }
 
 TrapProperty trap1 = TrapProperty(1, false,false);
-TrapProperty trap2 = TrapProperty(2, false,true);
+TrapProperty trap2 = TrapProperty(2, false,false);

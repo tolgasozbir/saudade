@@ -23,23 +23,20 @@ class GameMechanics {
     List<int> foundItemAmount=[];
 
     for (var i = 0; i < char.bagSize; i++) {    //TODO: Şanşa dayalı olsun
-      if (rnd.nextInt(11) >= 4) {
-        int rndItem = rnd.nextInt(ItemList.allItemList.length);
-        ItemList.allItemList[rndItem].amount++;
-        
-        if (foundItemName.contains(ItemList.allItemList[rndItem].name)) {
-          int count=0;
-          for (var item in foundItemName) {
-            if (item==ItemList.allItemList[rndItem].name) {
-              foundItemAmount[count]++;
-            }
-            count++;
+      int rndItem = rnd.nextInt(ItemList.allItemList.length);
+      ItemList.allItemList[rndItem].amount++;
+      
+      if (foundItemName.contains(ItemList.allItemList[rndItem].name)) {
+        int count=0;
+        for (var item in foundItemName) {
+          if (item==ItemList.allItemList[rndItem].name) {
+            foundItemAmount[count]++;
           }
-        } else {
-          foundItemName.add(ItemList.allItemList[rndItem].name);
-          foundItemAmount.add(1);
+          count++;
         }
-
+      } else {
+        foundItemName.add(ItemList.allItemList[rndItem].name);
+        foundItemAmount.add(1);
       }
     }
 

@@ -14,8 +14,10 @@ class _RadioMenuState extends State<RadioMenu> {
   @override
   void initState() {
     super.initState();
-    newsViewed.add(dailyNewsList[day]);
-    newsDay.add(day);
+    if (!newsViewed.contains(dailyNewsList[day])) {
+      newsViewed.add(dailyNewsList[day]);
+      newsDay.add(day);
+    }
   }
 
   @override
