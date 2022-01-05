@@ -12,6 +12,13 @@ class InventoryInfo extends StatefulWidget {
 }
 
 class _InventoryInfoState extends State<InventoryInfo> {
+
+  @override
+  void initState() {
+    super.initState();
+    ItemList.selectedItem = ItemList().myInvItemList[0];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(

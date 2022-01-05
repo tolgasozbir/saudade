@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:saudade/custom_widgets/cooking.dart';
+import 'package:saudade/custom_widgets/crafting.dart';
 import 'package:saudade/utils/context_extension.dart';
 import 'package:saudade/custom_widgets/character_info.dart';
 import 'package:saudade/custom_widgets/day_indicator.dart';
@@ -80,11 +82,11 @@ class _HouseScreenState extends State<HouseScreen> {
               Expanded( flex: 1,
                 child: Row(
                   children: [
-                    Expanded(flex: 3, child: MenuButton(onTap: null, btnText: "Craft")),
-                    Expanded(flex: 2, child: MenuButton(onTap: null, btnText: "Cook")),
-                    Expanded(flex: 2, child: MenuButton(onTap: null, btnText: "Traps")),
-                    Expanded(flex: 2, child: MenuButton(onTap: null, btnText: "Radio")),
-                    Expanded(flex: 2, child: MenuButton(onTap: null, btnText: "Heater")),
+                    Expanded(flex: 3, child: MenuButton(btnText: "Craft",onTap: () => showMenu(Crafting()))),
+                    Expanded(flex: 2, child: MenuButton(btnText: "Cook",onTap: () => showMenu(Cooking()))),
+                    ItemList.craftingItems[0].amount == 1 ?  Expanded(flex: 2, child: MenuButton(onTap: null, btnText: "Traps")) : const SizedBox(),
+                    ItemList.craftingItems[1].amount == 1 ?  Expanded(flex: 2, child: MenuButton(onTap: null, btnText: "Radio")) : const SizedBox(),
+                    ItemList.craftingItems[2].amount == 1 ?  Expanded(flex: 2, child: MenuButton(onTap: null, btnText: "Heater")): const SizedBox(),
                     Expanded(flex: 2, child: MenuButton(onTap: null, btnText: "Info")),
                     Expanded(flex: 3, child: MenuButton(onTap: null, btnText: "Finish")),   //border color ver özel
                   ],
@@ -103,7 +105,7 @@ class _HouseScreenState extends State<HouseScreen> {
     return Portrait(
       image: img,
       onTap: () {
-        print("                     Su${char.thirstinessRate} Açlık : ${char.hungerRate} Yorgunluk : ${char.tirednessRate} Hataklık : ${char.sicknessRate} Yaralılık : ${char.injuryRate}");
+        print("                     Su : ${char.thirstinessRate} - Açlık : ${char.hungerRate} - Yorgunluk : ${char.tirednessRate} - Hastalık : ${char.sicknessRate} - Sakatlanma : ${char.injuryRate}");
         print("isAlive? : ${char.isAlive}");
         showMenu(CharacterInfo(char: char));
       },

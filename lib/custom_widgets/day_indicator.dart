@@ -14,11 +14,11 @@ class _DayIndicatorState extends State<DayIndicator> {
 
   int hour=08;
   late Timer timer;
-
+/*
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(Duration(seconds: 5), (timer) {
+    timer = Timer.periodic(Duration(seconds: 10), (timer) {
       hour+=1;
       if (hour==24) {
         timer.cancel();
@@ -27,7 +27,7 @@ class _DayIndicatorState extends State<DayIndicator> {
       setState(() {});    
     });
   }
-
+*/
 
 
   @override
