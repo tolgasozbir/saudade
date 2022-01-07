@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:saudade/custom_widgets/day_indicator.dart';
+import 'package:saudade/custom_widgets/heater.dart';
 import 'package:saudade/custom_widgets/portrait.dart';
+import 'package:saudade/custom_widgets/traps.dart';
 import 'package:saudade/utils/game_mechanics.dart';
 import 'package:saudade/models/character.dart';
 import 'package:saudade/utils/context_extension.dart';
@@ -81,7 +85,24 @@ class _PreparingScreenState extends State<PreparingScreen> {
         gameMechanics.inNight();
         Navigator.pushNamed(context, "houseScreen");
         setState(() {
+
           day++;
+          temperature--;  //TODO: SOĞUKLUĞA GÖRE EVENT EKLE
+
+          if (heaterIsActive) {
+            heaterIsActive=false;
+            temperature-=addFuelCounter*5;
+            addFuelCounter=0;
+          }
+          
+          if (trap1.isTrapActive) {
+            trap1.ifThereIsMeat=Random().nextBool();
+          }
+          if (trap2.isTrapActive) {
+            trap2.ifThereIsMeat=Random().nextBool();
+          }
+
+
         });
       },
     );

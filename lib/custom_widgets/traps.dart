@@ -50,8 +50,8 @@ class _TrapsState extends State<Traps> {
               child: Image.asset("assets/trap.png", fit: BoxFit.contain),
               ),
             ),
-            Expanded(child: Center(child: trap.isTrapSet==true ? Text("Waiting") : Text("Ready for setup"))),
-            trap.isTrapSet == false ? SizedBox() : CircularProgressIndicator(), // TODO: EĞER YAKALANAN VARSA
+            Expanded(child: Center(child: trap.isTrapActive==true ? Text("Waiting") : Text("Ready for setup"))),
+            trap.isTrapActive == false ? SizedBox() : CircularProgressIndicator(),
           ],
         ),
       ),
@@ -77,7 +77,7 @@ class _TrapsState extends State<Traps> {
   Widget setupOrCollect() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: selectedTrap.isTrapSet == false ? 
+      child: selectedTrap.isTrapActive == false ? 
       setup() : 
       waitingAndCollect(),
     );
@@ -130,10 +130,10 @@ class _TrapsState extends State<Traps> {
     if (selectedTrap==trap1) {
       if (selectedBait==0 && ItemList.allItemList[8].amount>=1) {
         ItemList.allItemList[8].amount--;
-        selectedTrap.isTrapSet=true;
+        selectedTrap.isTrapActive=true;
       }else if(selectedBait==1 && ItemList.allItemList[6].amount>=1){
         ItemList.allItemList[6].amount--;
-        selectedTrap.isTrapSet=true;
+        selectedTrap.isTrapActive=true;
       }
       else{
         mySnackBar(context, "not enough food", 2);
@@ -141,10 +141,10 @@ class _TrapsState extends State<Traps> {
     }else{
       if (selectedBait==0 && ItemList.allItemList[8].amount>=1) {
         ItemList.allItemList[8].amount--;
-        selectedTrap.isTrapSet=true;
+        selectedTrap.isTrapActive=true;
       }else if(selectedBait==1 && ItemList.allItemList[6].amount>=1){
         ItemList.allItemList[6].amount--;
-        selectedTrap.isTrapSet=true;
+        selectedTrap.isTrapActive=true;
       }
       else{
         mySnackBar(context, "not enough food", 2);
@@ -157,7 +157,7 @@ class _TrapsState extends State<Traps> {
   }
 
   Widget waitingAndCollect() {
-    return selectedTrap.isHaveMeat==false ? waitingPhase(): collectMeat();
+    return selectedTrap.ifThereIsMeat==false ? waitingPhase(): collectMeat();
   }
 
   Column waitingPhase() {
@@ -191,8 +191,8 @@ class _TrapsState extends State<Traps> {
 
   void collectTrapMeat(){
     ItemList.allItemList[8].amount+=2;
-    selectedTrap.isHaveMeat=false;
-    selectedTrap.isTrapSet=false;
+    selectedTrap.ifThereIsMeat=false;
+    selectedTrap.isTrapActive=false;
     setState(() { });
   }
 
@@ -200,10 +200,10 @@ class _TrapsState extends State<Traps> {
 
 class TrapProperty {
   late int trapNum;
-  late bool isTrapSet;
-  late bool isHaveMeat;
+  late bool isTrapActive;
+  late bool ifThereIsMeat;
 
-  TrapProperty(this.trapNum,this.isTrapSet,this.isHaveMeat);
+  TrapProperty(this.trapNum,this.isTrapActive,this.ifThereIsMeat);
 }
 
 TrapProperty trap1 = TrapProperty(1, false,false);

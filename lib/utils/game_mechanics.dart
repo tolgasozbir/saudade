@@ -24,15 +24,42 @@ class GameMechanics {
 
     for (var i = 0; i < char.bagSize; i++) {        //5
       int rndItem = rnd.nextInt(100);
-      if (rndItem>=0 && rndItem<=15)      ItemList.allItemList[0].amount++;   //scrap
-      else if(rndItem>=16 && rndItem<=31) ItemList.allItemList[1].amount++;   //circuit
-      else if(rndItem>=32 && rndItem<=49) ItemList.allItemList[2].amount++;   //wood
-      else if(rndItem>=50 && rndItem<=55) ItemList.allItemList[3].amount++;   //bandage
-      else if(rndItem>=56 && rndItem<=59) ItemList.allItemList[4].amount++;   //piils
-      else if(rndItem>=60 && rndItem<=65) ItemList.allItemList[5].amount++;   //medical herbs
-      else if(rndItem>=66 && rndItem<=73) ItemList.allItemList[6].amount++;   //canned food
-      else if(rndItem>=74 && rndItem<=85) ItemList.allItemList[8].amount++;   //raw food
-      else if(rndItem>=84 && rndItem<=99) ItemList.allItemList[9].amount++;   //water
+      if (rndItem>=0 && rndItem<=15) {
+        ItemList.allItemList[0].amount++;     //scrap
+        print(ItemList.allItemList[0].name);
+      }
+      else if(rndItem>=16 && rndItem<=31){
+        ItemList.allItemList[1].amount++;     //circuit
+        print(ItemList.allItemList[1].name);
+      }   
+      else if(rndItem>=32 && rndItem<=49){
+        ItemList.allItemList[2].amount++;     //wood
+        print(ItemList.allItemList[2].name);
+      }    
+      else if(rndItem>=50 && rndItem<=55){
+        ItemList.allItemList[3].amount++;    //bandage
+        print(ItemList.allItemList[3].name);
+      }
+      else if(rndItem>=56 && rndItem<=59){
+        ItemList.allItemList[4].amount++;    //piils
+        print(ItemList.allItemList[4].name);
+      }
+      else if(rndItem>=60 && rndItem<=65){
+        ItemList.allItemList[5].amount++;    //medical herbs
+        print(ItemList.allItemList[5].name);
+      }
+      else if(rndItem>=66 && rndItem<=73){
+        ItemList.allItemList[6].amount++;    //canned food
+        print(ItemList.allItemList[6].name);
+      }
+      else if(rndItem>=74 && rndItem<=85){
+        ItemList.allItemList[8].amount++;    //raw food
+        print(ItemList.allItemList[8].name);
+      }
+      else if(rndItem>=84 && rndItem<=99){
+        ItemList.allItemList[9].amount++;    //water
+        print(ItemList.allItemList[9].name);
+      }
       
     }
   }
@@ -73,8 +100,6 @@ class GameMechanics {
   void randomEvents(){  //TODO: random events
 
   }
-
-
 
 }
 

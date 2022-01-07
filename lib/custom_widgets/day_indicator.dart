@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:saudade/utils/context_extension.dart';
 
@@ -18,7 +17,7 @@ class _DayIndicatorState extends State<DayIndicator> {
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(Duration(seconds: 10), (timer) {
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
       hour+=1;
       if (hour==24) {
         timer.cancel();
@@ -28,6 +27,11 @@ class _DayIndicatorState extends State<DayIndicator> {
     });
   }
 
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
 
 
   @override
@@ -41,7 +45,7 @@ class _DayIndicatorState extends State<DayIndicator> {
           children: [
             Expanded(child: Center(child: Text("Day ${day}",style: context.theme.textTheme.subtitle1))),
             Expanded(child: Center(child: Text("${hour}:00",style: context.theme.textTheme.subtitle1!.copyWith(fontSize: 15)))),
-            Expanded(child: Center(child: Text("20 °C",style: context.theme.textTheme.subtitle1!.copyWith(fontSize: 14)))),
+            Expanded(child: Center(child: Text("${temperature} °C",style: context.theme.textTheme.subtitle1!.copyWith(fontSize: 14)))),
           ],
         ),
       ),
@@ -50,3 +54,4 @@ class _DayIndicatorState extends State<DayIndicator> {
 }
 
 int day=1;
+int temperature=20;

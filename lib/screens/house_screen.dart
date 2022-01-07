@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:saudade/custom_widgets/cooking.dart';
 import 'package:saudade/custom_widgets/crafting.dart';
+import 'package:saudade/custom_widgets/heater.dart';
 import 'package:saudade/custom_widgets/radio.dart';
 import 'package:saudade/custom_widgets/traps.dart';
 import 'package:saudade/utils/context_extension.dart';
@@ -20,7 +21,6 @@ class HouseScreen extends StatefulWidget {
   _HouseScreenState createState() => _HouseScreenState();
 }
 
-//TODO: preparing ekranında back tuşu çalışmasın
 class _HouseScreenState extends State<HouseScreen> {
 
   @override
@@ -44,56 +44,15 @@ class _HouseScreenState extends State<HouseScreen> {
             width: context.dynamicWidth(1),
             height: context.dynamicHeight(1),
             decoration: BoxDecoration(
-              //color: Colors.red,
               border: Border.all(color: Colors.white38),
               borderRadius: const BorderRadius.all(Radius.circular(4.0)),
             ),
             child: Column(
               children: [
-                /////////////////////     üst alan     ////////////////////
-                Expanded(
-                  child: Row(
-                    children: [
-                      Expanded(flex: 1,child: portrait(CharacterList.c1)),
-                      Expanded(flex: 1,child: portrait(CharacterList.c2)),
-                      Expanded(flex: 1,child: portrait(CharacterList.c3)),
-                       ////         Day-Time    //// düzenle
-                      Expanded(flex: 1,child: DayIndicator()),  //TODO: Saat kısmı düzenlencek
 
-                      Expanded(flex: 2,child: MenuButton(btnText: "Inventory",onTap: () =>showMenu(InventoryInfo()))),
-                      
-                          
-                      Expanded(flex: 1, child: MenuButton(btnText: "Exit",borderColor: Color(0xFF8D021F), borderWidth: 2, onTap: (){print("Exit");},)),
-                    ],
-                  ),
-                ),
-
-                ///     orta alan   ///
-                Expanded( flex: 3,
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Container(
-                      //color: Colors.grey,
-                      child: selectedMenu,
-                    )
-                  ),
-                ),
-
-
-              ////  Alt   //
-              Expanded( flex: 1,
-                child: Row(
-                  children: [
-                    Expanded(flex: 3, child: MenuButton(btnText: "Craft",onTap: () => showMenu(Crafting()))),
-                    Expanded(flex: 2, child: MenuButton(btnText: "Cook",onTap: () => showMenu(Cooking()))),
-                    ItemList.craftingItems[1].amount == 1 ?  Expanded(flex: 2, child: MenuButton(btnText: "Traps", onTap: () => showMenu(Traps()))) : const SizedBox(),
-                    ItemList.craftingItems[2].amount == 1 ?  Expanded(flex: 2, child: MenuButton(btnText: "Radio", onTap: () => showMenu(RadioMenu()))) : const SizedBox(),
-                    ItemList.craftingItems[3].amount == 1 ?  Expanded(flex: 2, child: MenuButton(onTap: null, btnText: "Heater")): const SizedBox(),
-                    Expanded(flex: 2, child: MenuButton(onTap: null, btnText: "Info")),
-                    Expanded(flex: 3, child: MenuButton(onTap: null, btnText: "Finish")),   //border color ver özel
-                  ],
-                ),
-              ),
+                Expanded(flex: 1, child: top()),
+                Expanded(flex: 3, child: middle()),
+                Expanded(flex: 1, child: bottom()),
 
               ],
             ),
@@ -102,6 +61,67 @@ class _HouseScreenState extends State<HouseScreen> {
       ),
     );
   }
+
+  Row top() {
+    return Row(
+      children: [
+        Expanded(flex: 1,child: portrait(CharacterList.c1)),
+        Expanded(flex: 1,child: portrait(CharacterList.c2)),
+        Expanded(flex: 1,child: portrait(CharacterList.c3)),
+        Expanded(flex: 1,child: DayIndicator()),  //TODO: Saat kısmı düzenlencek
+        Expanded(flex: 2,child: myButton("Inventory", InventoryInfo())),
+        Expanded(flex: 1, child: exitButton()),
+      ],
+    );
+  }
+
+  Padding middle() {
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: Container(
+        child: selectedMenu,
+      )
+    );
+  }
+
+  Row bottom() {
+    return Row(
+      children: [
+        Expanded(flex: 3, child: myButton("Craft", Crafting())),
+        Expanded(flex: 2, child: myButton("Cook", Cooking())),
+        ItemList.craftingItems[1].amount == 1 ?  Expanded(flex: 2, child: myButton("Traps", Traps()))     : const SizedBox(),
+        ItemList.craftingItems[2].amount == 1 ?  Expanded(flex: 2, child: myButton("Radio", RadioMenu())) : const SizedBox(),
+        ItemList.craftingItems[3].amount == 1 ?  Expanded(flex: 2, child: myButton("Heater", Heater()))   : const SizedBox(),
+        Expanded(flex: 2, child: myButton("Info", Crafting())),
+        Expanded(flex: 3, child: finishDayButton(context)),
+      ],
+    );
+  }
+
+  MenuButton exitButton() {
+    return MenuButton(
+      btnText: "Exit",
+      borderColor: Color(0xFF8D021F), 
+      borderWidth: 2, 
+      onTap: (){print("Exit");},  //TODO: exit 
+    );
+  }
+
+  MenuButton myButton(String btnText, Widget widgetMenu){
+    return MenuButton(
+      btnText: btnText,
+      onTap: ()=> showMenu(widgetMenu),
+    );
+  }
+
+  MenuButton finishDayButton(BuildContext context) {
+    return MenuButton(
+      borderColor: Color(0xFF33AA33), 
+      btnText: "Finish Day", 
+      onTap: () => {Navigator.pushNamedAndRemoveUntil(context, "preparingScreen", (route) => false)} 
+    );
+  }
+  
 
   Portrait portrait(Character char) {
     return Portrait(
@@ -113,7 +133,6 @@ class _HouseScreenState extends State<HouseScreen> {
       },
     );
   }
-
 
   void showMenu(Widget widget) {
     setState(() {
