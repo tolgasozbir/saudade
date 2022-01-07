@@ -17,47 +17,41 @@ class GameMechanics {
 
   void scavenge(Character char){
     print(char.name + " Scavengeeee");
-    char.tirednessRate-=(24+Random().nextInt(37));   //////////// TODO: düzenle
+    char.tirednessRate+=(32+Random().nextInt(5));    //tiredness + 32-36
+    char.sicknessRate +=(8+Random().nextInt(5));     //sick      + 8-12
+    char.injuryRate +=(4+Random().nextInt(9));       //injuary   + 4-12
     Random rnd = Random();
-    List<String> foundItemName=[];
-    List<int> foundItemAmount=[];
 
-    for (var i = 0; i < char.bagSize; i++) {    //TODO: Şanşa dayalı olsun
-      int rndItem = rnd.nextInt(ItemList.allItemList.length);
-      ItemList.allItemList[rndItem].amount++;
+    for (var i = 0; i < char.bagSize; i++) {        //5
+      int rndItem = rnd.nextInt(100);
+      if (rndItem>=0 && rndItem<=15)      ItemList.allItemList[0].amount++;   //scrap
+      else if(rndItem>=16 && rndItem<=31) ItemList.allItemList[1].amount++;   //circuit
+      else if(rndItem>=32 && rndItem<=49) ItemList.allItemList[2].amount++;   //wood
+      else if(rndItem>=50 && rndItem<=55) ItemList.allItemList[3].amount++;   //bandage
+      else if(rndItem>=56 && rndItem<=59) ItemList.allItemList[4].amount++;   //piils
+      else if(rndItem>=60 && rndItem<=65) ItemList.allItemList[5].amount++;   //medical herbs
+      else if(rndItem>=66 && rndItem<=73) ItemList.allItemList[6].amount++;   //canned food
+      else if(rndItem>=74 && rndItem<=85) ItemList.allItemList[8].amount++;   //raw food
+      else if(rndItem>=84 && rndItem<=99) ItemList.allItemList[9].amount++;   //water
       
-      if (foundItemName.contains(ItemList.allItemList[rndItem].name)) {
-        int count=0;
-        for (var item in foundItemName) {
-          if (item==ItemList.allItemList[rndItem].name) {
-            foundItemAmount[count]++;
-          }
-          count++;
-        }
-      } else {
-        foundItemName.add(ItemList.allItemList[rndItem].name);
-        foundItemAmount.add(1);
-      }
     }
-
-    print("items found");
-    for (var i = 0; i < foundItemAmount.length; i++) {
-      print(foundItemName[i] +" "+ foundItemAmount[i].toString());
-    }
-
   }
 
   void guard(Character char){
-    print(char.name + " Guarddddddddd");
-    char.tirednessRate -=(16+Random().nextInt(24));      ////////////
+    char.tirednessRate +=(16+Random().nextInt(17));   //tiredness + 16-32
+    char.sicknessRate +=(8+Random().nextInt(5));     //sick      + 8-12
+    print(char.name + " Guard");
   }
 
   void sleep(Character char){
-    print(char.name + " ZZZZZZZZz");
-    char.tirednessRate+=(24+Random().nextInt(37));       //////////////
-    if (char.tirednessRate>100) {
-      char.tirednessRate=100;
-    }
+    char.tirednessRate-=(24+Random().nextInt(13));    //tiredness - 24-36
+    char.injuryRate-=(12+Random().nextInt(13));       //injuary   - 12-24
+    char.sicknessRate-=(16+Random().nextInt(13));     //Sick      - 16-28
+    if (char.tirednessRate<=0) char.tirednessRate=0;
+    if (char.injuryRate<=0) char.injuryRate=0;
+    if (char.sicknessRate<=0) char.sicknessRate=0;
+
+    print(char.name + " Uyuyor");
   }
 
   void doSelectedTask(){
@@ -65,13 +59,22 @@ class GameMechanics {
     int que=0;
     for (var item in charStates) {
       Character selectedChar = CharacterList.charList[que];
-      selectedChar.hungerRate-=(24+Random().nextInt(37));        //////////////
+
+      selectedChar.hungerRate+=(16+Random().nextInt(17));       //Hungry      + 16-32
+      selectedChar.thirstinessRate+=(12+Random().nextInt(13));  //thirstness  + 12-24
+
       if (item==1) sleep(selectedChar);
       else if(item == 2) guard(selectedChar);
       else scavenge(selectedChar);
       que++;
     }
   }
+
+  void randomEvents(){  //TODO: random events
+
+  }
+
+
 
 }
 
