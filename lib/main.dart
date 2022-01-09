@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:saudade/utils/character_list.dart';
 import 'package:saudade/screens/house_screen.dart';
 import 'package:saudade/screens/main_screen.dart';
 import 'package:saudade/screens/preparing_screen.dart';
@@ -29,7 +28,7 @@ class MyApp extends StatelessWidget {
         "/" : (context) => SplashScreen(),
         "mainScreen" : (context) => MainScreen(),
         "houseScreen" : (context) => HouseScreen(),
-        "preparingScreen" : (context) => PreparingScreen(c1: CharacterList.c1, c2: CharacterList.c2, c3: CharacterList.c3,),
+        "preparingScreen" : (context) => PreparingScreen(),
       },
     );
   }

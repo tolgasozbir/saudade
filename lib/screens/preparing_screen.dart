@@ -1,20 +1,17 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:saudade/custom_widgets/day_indicator.dart';
 import 'package:saudade/custom_widgets/heater.dart';
 import 'package:saudade/custom_widgets/portrait.dart';
 import 'package:saudade/custom_widgets/traps.dart';
+import 'package:saudade/utils/character_list.dart';
 import 'package:saudade/utils/game_mechanics.dart';
-import 'package:saudade/models/character.dart';
 import 'package:saudade/utils/context_extension.dart';
 
 class PreparingScreen extends StatefulWidget {
-  const PreparingScreen({required this.c1,required this.c2,required this.c3, Key? key}) : super(key: key);
+  const PreparingScreen({Key? key}) : super(key: key);
   
-  final Character? c1;
-  final Character? c2;
-  final Character? c3;
+
 
   @override
   _PreparingScreenState createState() => _PreparingScreenState();
@@ -44,11 +41,11 @@ class _PreparingScreenState extends State<PreparingScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            Expanded(flex: 6, child: selectionChar1(char1Value)),
+            CharacterList.c1.isAlive ? Expanded(flex: 6, child: selectionChar1(char1Value)) : const SizedBox(),
             Spacer(),
-            Expanded(flex: 6, child: selectionChar2(char2Value)),
+            CharacterList.c2.isAlive ? Expanded(flex: 6, child: selectionChar2(char2Value)) : const SizedBox(),
             Spacer(),
-            Expanded(flex: 6, child: selectionChar3(char3Value)),
+            CharacterList.c3.isAlive ? Expanded(flex: 6, child: selectionChar3(char3Value)) : const SizedBox(),
             Expanded(flex: 4, child: goLootIcon()),
           ],
         ),
@@ -83,27 +80,34 @@ class _PreparingScreenState extends State<PreparingScreen> {
       onTap: (){
         GameMechanics gameMechanics= GameMechanics(char1Value,char2Value,char3Value);
         gameMechanics.inNight();
-        Navigator.pushNamed(context, "houseScreen");
-        setState(() {
 
-          day++;
-          temperature--;  //TODO: SOĞUKLUĞA GÖRE EVENT EKLE
+        //All chars is dead
+        if (!CharacterList.c1.isAlive && !CharacterList.c2.isAlive && !CharacterList.c3.isAlive) {
+          Navigator.pushNamedAndRemoveUntil(context, "/", (route) => false);
+        }else{
 
-          if (heaterIsActive) {
-            heaterIsActive=false;
-            temperature-=addFuelCounter*5;
-            addFuelCounter=0;
-          }
-          
-          if (trap1.isTrapActive) {
-            trap1.ifThereIsMeat=Random().nextBool();
-          }
-          if (trap2.isTrapActive) {
-            trap2.ifThereIsMeat=Random().nextBool();
-          }
+          Navigator.pushNamedAndRemoveUntil(context, "houseScreen", (route) => false);
+          setState(() {
+
+            day++;
+            temperature--;  //TODO: SOĞUKLUĞA GÖRE EVENT EKLE
+
+            if (heaterIsActive) {
+              heaterIsActive=false;
+              temperature-=addFuelCounter*5;
+              addFuelCounter=0;
+            }
+            
+            if (trap1.isTrapActive) {
+              trap1.ifThereIsMeat=Random().nextBool();
+            }
+            if (trap2.isTrapActive) {
+              trap2.ifThereIsMeat=Random().nextBool();
+            }
 
 
-        });
+          });
+        }
       },
     );
   }

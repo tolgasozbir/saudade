@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:saudade/custom_widgets/cooking.dart';
 import 'package:saudade/custom_widgets/crafting.dart';
@@ -27,8 +28,9 @@ class _HouseScreenState extends State<HouseScreen> {
   void initState() {
     super.initState();
     ItemList.selectedItem=ItemList().myInvItemList[0];
-
   }
+
+  //TODO: CRAFTLANAN İTEMLERE GÖRE ÖZELLİKLERİNİ VER
 
   dynamic selectedMenu;
   final img = "https://picsum.photos/200";
@@ -65,10 +67,10 @@ class _HouseScreenState extends State<HouseScreen> {
   Row top() {
     return Row(
       children: [
-        Expanded(flex: 1,child: portrait(CharacterList.c1)),
-        Expanded(flex: 1,child: portrait(CharacterList.c2)),
-        Expanded(flex: 1,child: portrait(CharacterList.c3)),
-        Expanded(flex: 1,child: DayIndicator()),  //TODO: Saat kısmı düzenlencek
+        Expanded(flex: 1,child: CharacterList.c1.isAlive ? portrait(CharacterList.c1) : deathPortrait(CharacterList.c1)),
+        Expanded(flex: 1,child: CharacterList.c2.isAlive ? portrait(CharacterList.c2) : deathPortrait(CharacterList.c2)),
+        Expanded(flex: 1,child: CharacterList.c3.isAlive ? portrait(CharacterList.c3) : deathPortrait(CharacterList.c3)),
+        Expanded(flex: 1,child: DayIndicator()),
         Expanded(flex: 2,child: myButton("Inventory", InventoryInfo())),
         Expanded(flex: 1, child: exitButton()),
       ],
@@ -103,7 +105,7 @@ class _HouseScreenState extends State<HouseScreen> {
       btnText: "Exit",
       borderColor: Color(0xFF8D021F), 
       borderWidth: 2, 
-      onTap: (){print("Exit");},  //TODO: exit 
+      onTap: (){exit(0);}
     );
   }
 
@@ -133,6 +135,16 @@ class _HouseScreenState extends State<HouseScreen> {
       },
     );
   }
+
+  ColorFiltered deathPortrait(Character char){
+    return ColorFiltered(
+      colorFilter: ColorFilter.mode(
+        Colors.grey, 
+        BlendMode.saturation
+      ),
+      child: portrait(char),
+    );
+  } 
 
   void showMenu(Widget widget) {
     setState(() {

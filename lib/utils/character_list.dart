@@ -1,15 +1,15 @@
 import 'package:saudade/models/character.dart';
 
 class CharacterList {
-  static Character c1 = new Character(id: 1,name: "Tolga", image: "", hungerRate: 0, thirstinessRate: 0, tirednessRate: 0, sicknessRate: 0, injuryRate: 0 ,bagSize: 4);
-  static Character c2 = new Character(id: 2,name: "Levent", image: "", hungerRate: 0, thirstinessRate: 0, tirednessRate: 0, sicknessRate: 0, injuryRate: 0, bagSize: 4);
-  static Character c3 = new Character(id: 3,name: "Bilo", image: "", hungerRate: 0, thirstinessRate: 0, tirednessRate: 0, sicknessRate: 0,injuryRate: 0 , bagSize: 4);
+  static Character c1 = new Character(id: 1,name: "Tolga", image: "", hungerRate: 0, thirstinessRate: 0, tirednessRate: 0, sicknessRate: 0, injuryRate: 0 ,bagSize: 12);
+  static Character c2 = new Character(id: 2,name: "Levent", image: "", hungerRate: 0, thirstinessRate: 0, tirednessRate: 0, sicknessRate: 0, injuryRate: 0, bagSize: 12);
+  static Character c3 = new Character(id: 3,name: "Bilo", image: "", hungerRate: 0, thirstinessRate: 0, tirednessRate: 0, sicknessRate: 0,injuryRate: 0 , bagSize: 12);
 
   static List<Character> charList = [CharacterList.c1,CharacterList.c2,CharacterList.c3];
 
   static void isAlive(Character char) {
     if (char.hungerRate >= 100 || char.thirstinessRate>=100 || char.tirednessRate>=100 || char.sicknessRate>=100 || char.injuryRate>=100) {
-      char.isAlive=false;  //TODO: ölüm durumunu kodla ne olcaksa
+      char.isAlive=false;
     }
   }
 
@@ -44,7 +44,7 @@ class CharacterList {
     }
     char.mood+=hungry;
 
-    List<String> statTired =["Well Rested, ", "", "Tired, ", "So Tired, "];
+    List<String> statTired =["Well Rested, ", "Tired, ", "So Tired, ", "Deadly Tired, "];
     String tired="";
     if (char.tirednessRate>=0 && char.tirednessRate <25) {
       tired=statTired[0];
@@ -90,4 +90,12 @@ class CharacterList {
     }
 
   }
+
+  static void checkCharsMoodAlive(){
+    for (var item in CharacterList.charList) {
+      CharacterList.calculateMood(item);
+      CharacterList.isAlive(item);
+    }
+  }
+
 }

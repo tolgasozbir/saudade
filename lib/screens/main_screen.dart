@@ -20,6 +20,7 @@ class MainScreen extends StatelessWidget {
                   child: Center(child: Text("New Game", style: context.theme.textTheme.headline5,))),
                 onPressed: (){
                   Navigator.pushNamed(context, "houseScreen");
+                  //TODO: Reset everything
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Color(0xFF545454),

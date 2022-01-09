@@ -13,6 +13,7 @@ class GameMechanics {
 
   void inNight(){
     doSelectedTask();
+    CharacterList.checkCharsMoodAlive();
   }
 
   void scavenge(Character char){
@@ -22,7 +23,7 @@ class GameMechanics {
     char.injuryRate +=(4+Random().nextInt(9));       //injuary   + 4-12
     Random rnd = Random();
 
-    for (var i = 0; i < char.bagSize; i++) {        //5
+    for (var i = 0; i < char.bagSize; i++) {        //8   //TODO: ORANLARI DÜZENLE
       int rndItem = rnd.nextInt(100);
       if (rndItem>=0 && rndItem<=15) {
         ItemList.allItemList[0].amount++;     //scrap
